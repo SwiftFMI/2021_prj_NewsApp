@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         let scrollingAppearance = UINavigationBarAppearance()
         scrollingAppearance.configureWithTransparentBackground()
-        scrollingAppearance.backgroundColor = .primaryBackgrond
+        scrollingAppearance.backgroundColor = .secondaryBackground
             
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().standardAppearance = appearance
@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().compactAppearance = scrollingAppearance
         
         let menuController = SideMenuViewController()
-        menuController.view.backgroundColor = .primaryBackgrond
+        menuController.view.backgroundColor = .secondaryBackground
         
         let dashboardViewController = DashboardViewController()
         let navigationController = ProjectNavigationController(rootViewController: dashboardViewController)

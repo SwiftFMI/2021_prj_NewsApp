@@ -149,9 +149,9 @@ extension SideMenuViewController: UITableViewDelegate {
             titleLabel.leftAnchor.constraint(equalTo: header.leftAnchor, constant: paddingLeft)
         ])
         
-        titleLabel.text = "Session tools"
+        titleLabel.text = "Categories"
         titleLabel.font = UIFont.newsAppFont(ofSize: 14, weight: .bold)
-        titleLabel.textColor = UIColor.primaryInteractiveText
+        titleLabel.textColor = UIColor.primaryStaticText
         
         return header
     }

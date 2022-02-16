@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum SideMenuItemType {
-    case dashboard, favourites, recommended, categories, politics, technology, business, health
+    case dashboard, favourites, recommended, politics, technology, business, health
 }
 
 struct SideMenuItem {
@@ -25,7 +25,6 @@ struct MenuItems {
         SideMenuItem(image: SystemAssets.personCropCircle, tintColor: .systemBlue, title: "Dashboard", type: .dashboard),
         SideMenuItem(image: SystemAssets.gearCircle, tintColor: .systemBlue, title: "Favourites", type: .favourites),
         SideMenuItem(image: SystemAssets.arrowShapeUpRightCircle, tintColor: .systemBlue, title: "Recommended", type: .recommended),
-        SideMenuItem(image: SystemAssets.arrowShapeUpRightCircle, tintColor: .systemBlue, title: "Categories", type: .categories),
     ]
     
     let categories = [
@@ -33,7 +32,7 @@ struct MenuItems {
         SideMenuItem(image: SystemAssets.xmarkCircle, tintColor: .systemRed, title: "Politics", type: .politics),
         SideMenuItem(image: SystemAssets.key, tintColor: .systemGreen, title: "Technology", type: .technology),
         SideMenuItem(image: SystemAssets.key, tintColor: .systemGreen, title: "Business", type: .business),
-        SideMenuItem(image: SystemAssets.key, tintColor: .systemGreen, title: "health", type: .health),
+        SideMenuItem(image: SystemAssets.key, tintColor: .systemGreen, title: "Health", type: .health),
     ]
     
     func getIndex(type: SideMenuItemType) -> (section: Int, row: Int) {
@@ -44,8 +43,6 @@ struct MenuItems {
             return (0, 1)
         case .recommended:
             return (0, 2)
-        case .categories:
-            return (0, 3)
         case .politics:
             return (1, 0)
         case .technology:
