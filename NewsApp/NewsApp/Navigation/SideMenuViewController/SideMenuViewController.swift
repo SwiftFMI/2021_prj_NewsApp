@@ -96,7 +96,7 @@ class SideMenuViewController: UIViewController {
     }
     
     func itemsForSection(_ section: Int) -> [SideMenuItem] {
-        items.mainItems
+        return section == 0 ? items.mainItems : items.categories
     }
 }
 
