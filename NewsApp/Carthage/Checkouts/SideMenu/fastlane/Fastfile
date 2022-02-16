@@ -1,0 +1,49 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Generates documentation for given version."
+  lane :doc do |options|
+    target_version = options[:version]
+
+    if target_version.nil?
+      UI.user_error!("Missing 'version' parameter")
+    end
+    
+    Actions.sh("cd .. && jazzy \
+                      --clean \
+                      -x USE_SWIFT_RESPONSE_FILE=NO \
+                      --author \"Xing He\" \
+                      --author_url https://kushi.me \
+                      --github_url https://github.com/kukushi/SideMenu \
+                      --github-file-prefix https://github.com/kukushi/SideMenu/#{target_version} \
+                      --module-version #{target_version} \
+                      --module SideMenu \
+                      --root-url http://kukushi.github.io/SideMenu/ \
+                      --output docs/ \
+                      --theme fullwidth")
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+
+    scan(
+      scheme: "SideMenu", 
+      devices: ['iPhone Xʀ']
+      )
+  end
+end

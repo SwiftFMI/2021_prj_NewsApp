@@ -1,0 +1,17 @@
+on: push
+name: Test
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build and test
+        run: |
+          gem update --system
+          gem install bundler
+          bundle install
+          bundle exec fastlane test

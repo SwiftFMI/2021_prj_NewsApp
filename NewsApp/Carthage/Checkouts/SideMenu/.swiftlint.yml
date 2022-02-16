@@ -1,0 +1,34 @@
+disabled_rules:
+   # TODO
+   - function_body_length
+   # TODO
+   - cyclomatic_complexity
+   # TODO
+   - type_body_length
+   - nesting
+
+opt_in_rules:
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - legacy_random
+  - overridden_super_call
+  - override_in_extension
+  - prohibited_super_call
+  - redundant_type_annotation
+  - static_operator
+  - toggle_bool
+
+included: # paths to ignore during linting. Takes precedence over `included`.
+  - SideMenu
+  - Example
+
+identifier_name:
+  excluded: # excluded via string array
+    - ID
+    # Used by UIKit
+    # `func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath)`
+    - to
+file_length:
+  warning: 999
+  error: 1500
+line_length: 140

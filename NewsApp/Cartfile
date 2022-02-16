@@ -1,0 +1,3 @@
+github "Alamofire/Alamofire" ~> 5.5
+github "kukushi/SideMenu" "master"
+github "realm/realm-cocoa" "master"

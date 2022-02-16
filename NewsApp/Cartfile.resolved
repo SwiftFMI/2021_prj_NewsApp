@@ -1,0 +1,3 @@
+github "Alamofire/Alamofire" "5.5.0"
+github "kukushi/SideMenu" "c168c143a1acb690ebb992406d9a03ce8791f47c"
+github "realm/realm-cocoa" "bf5c0461952c427caaf5ef738a2050dcaaaa9830"
