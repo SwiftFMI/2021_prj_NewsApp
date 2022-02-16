@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 class SystemAssets {
-    //TODO: example system assets from old project, replace with what is needed
+    // TODO: example system assets from old project, replace with what is needed
+    // you can find apple's system assets in the "SF Symbols" app that should come preinstalled with most macs.
     static let arrowUpCircleFill = UIImage(systemName: "arrow.up.circle.fill")
     static let plusCircleFill = UIImage(systemName: "plus.circle.fill")
     static let squareAndPencil = UIImage(systemName: "square.and.pencil")
