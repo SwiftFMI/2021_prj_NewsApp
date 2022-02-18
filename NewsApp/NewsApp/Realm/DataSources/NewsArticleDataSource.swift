@@ -14,6 +14,7 @@ protocol NewsArticleDataSourceDelegate: AnyObject {
     func newsArticleDataSourceDelegate(didUpdateArticles dataSource: NewsArticleDataSource)
 }
 
+/// Use this data source if you are displaying the data in a UITableView.
 class NewsArticleTableViewDataSource: NewsArticleDataSource {
     weak var tableView: UITableView?
     
@@ -26,6 +27,7 @@ class NewsArticleTableViewDataSource: NewsArticleDataSource {
     }
 }
 
+/// Use this data source if you are displaying the data in a UICollectionView.
 class NewsArticleCollectionViewDataSource: NewsArticleDataSource {
     weak var collectionView: UICollectionView?
     
@@ -37,7 +39,6 @@ class NewsArticleCollectionViewDataSource: NewsArticleDataSource {
         return RealmHelper.observeRealmCollectionResults(collectionView: collectionView, results: articles)
     }
 }
-
 
 class NewsArticleDataSource {
     private var articlesDb: Results<ArticleDB>?
