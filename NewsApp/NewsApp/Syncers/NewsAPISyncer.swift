@@ -16,7 +16,8 @@ fileprivate let apiKey = "41c44882480a4ba78343301163d2c0bd"
 
 class NewsAPISyncer: NSObject {
     
-    func getTopHeadlines(forCategory category: NewsCategory, country: String? = nil, query: String? = nil, page: Int = 1, completion: @escaping ([Article]?) -> Void) {
+    /// Atleast one parameter should have a value.
+    func getTopHeadlines(forCategory category: NewsCategory? = nil, country: NewsCountry? = nil, query: String? = nil, page: Int = 1, completion: @escaping ([Article]?) -> Void) {
         getTopHeadlines(forCategory: category, source: nil, country: country, query: query, page: page, completion: completion)
     }
     
@@ -69,7 +70,7 @@ class NewsAPISyncer: NSObject {
     
     private func getTopHeadlines(forCategory category: NewsCategory? = nil,
                                  source: NewsSource? = nil,
-                                 country: String? = nil,
+                                 country: NewsCountry? = nil,
                                  query: String? = nil,
                                  page: Int = 1,
                                  completion: @escaping ([Article]?) -> Void) {
@@ -82,6 +83,10 @@ class NewsAPISyncer: NSObject {
         
         if let source = source {
             params["sources"] = source.rawValue
+        }
+        
+        if let country = country {
+            params["country"] = country.rawValue
         }
         
         if let query = query {
