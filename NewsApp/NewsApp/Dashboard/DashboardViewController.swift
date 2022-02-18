@@ -10,6 +10,8 @@ import UIKit
 
 class DashboardViewController: UIViewController {
     
+    private let articleDataSource = NewsArticleDataSource()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,13 +24,25 @@ class DashboardViewController: UIViewController {
         let sideMenuButtonBarButtonItem = UIBarButtonItem(customView: sideMenuButton)
         navigationItem.rightBarButtonItem = sideMenuButtonBarButtonItem
         
-        NewsAPISyncer().getAllArticles(forSource: .BBC, completion: { articles in
-            NSLog("\(String(describing: articles))")
-        })
+        articleDataSource.delegate = self
+        articleDataSource.loadArticles()
+        articleDataSource.syncArticles(forCountry: .bg)
+        
+        NSLog("\(articleDataSource.articles)")
     }
     
     @objc private func showRightSideBar() {
         guard let sideMenuController = sideMenuController else { return }
         sideMenuController.isMenuRevealed ? sideMenuController.hideMenu() : sideMenuController.revealMenu()
+    }
+}
+
+extension DashboardViewController: NewsArticleDataSourceDelegate {
+    func newsArticleDataSourceDeletage(willUpdateArticles dataSource: NewsArticleDataSource) {
+        NSLog("willUpdate")
+    }
+    
+    func newsArticleDataSourceDelegate(didUpdateArticles dataSource: NewsArticleDataSource) {
+        NSLog("didUpdate")
     }
 }

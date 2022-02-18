@@ -48,6 +48,8 @@
 		202CBB4927BD6C2A00DA4FCD /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 202CBB4727BD6C2A00DA4FCD /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		202CBB4B27BD6C2C00DA4FCD /* SideMenu.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202CBB4A27BD6C2C00DA4FCD /* SideMenu.xcframework */; };
 		202CBB4C27BD6C2C00DA4FCD /* SideMenu.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 202CBB4A27BD6C2C00DA4FCD /* SideMenu.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		203EC8AC27C0139F00FB20CE /* NewsArticleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EC8AB27C0139F00FB20CE /* NewsArticleDataSource.swift */; };
+		203EC8AF27C0152500FB20CE /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EC8AE27C0152500FB20CE /* RealmHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -107,6 +109,8 @@
 		202CBB4427BD6C2800DA4FCD /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		202CBB4727BD6C2A00DA4FCD /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
 		202CBB4A27BD6C2C00DA4FCD /* SideMenu.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SideMenu.xcframework; path = Carthage/Build/SideMenu.xcframework; sourceTree = "<group>"; };
+		203EC8AB27C0139F00FB20CE /* NewsArticleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleDataSource.swift; sourceTree = "<group>"; };
+		203EC8AE27C0152500FB20CE /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 		202CBAF227BD5F2B00DA4FCD /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				203EC8AD27C0151600FB20CE /* Realm */,
 				200DEB8427BEBD3200169D33 /* Syncers */,
 				202CBB3A27BD689200DA4FCD /* Dashboard */,
 				202CBB3427BD65A700DA4FCD /* Models */,
@@ -297,6 +302,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		203EC8AA27C0139000FB20CE /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				203EC8AB27C0139F00FB20CE /* NewsArticleDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		203EC8AD27C0151600FB20CE /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				203EC8AA27C0139000FB20CE /* DataSources */,
+				203EC8AE27C0152500FB20CE /* RealmHelper.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -384,6 +406,7 @@
 				202CBB2527BD641F00DA4FCD /* UIFontExtensions.swift in Sources */,
 				202CBB2327BD63E800DA4FCD /* UIViewControllerExtensions.swift in Sources */,
 				200DEB8E27BEE42A00169D33 /* Article.swift in Sources */,
+				203EC8AC27C0139F00FB20CE /* NewsArticleDataSource.swift in Sources */,
 				200DEB8927BEBDC200169D33 /* ArticleDB.swift in Sources */,
 				202CBB2727BD647700DA4FCD /* RealmExtensions.swift in Sources */,
 				200DEB9127BEEB4B00169D33 /* NewsAPIEnums.swift in Sources */,
@@ -397,6 +420,7 @@
 				202CBAF427BD5F2B00DA4FCD /* AppDelegate.swift in Sources */,
 				202CBB0A27BD5F5200DA4FCD /* NoItemsView.swift in Sources */,
 				202CBB3127BD650A00DA4FCD /* SideMenuTableViewCell.swift in Sources */,
+				203EC8AF27C0152500FB20CE /* RealmHelper.swift in Sources */,
 				202CBB1C27BD619400DA4FCD /* PopoverTableViewController.swift in Sources */,
 				202CBAF627BD5F2B00DA4FCD /* SceneDelegate.swift in Sources */,
 			);
