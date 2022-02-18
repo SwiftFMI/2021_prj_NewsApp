@@ -15,6 +15,7 @@ protocol NewsArticleDataSourceDelegate: AnyObject {
 }
 
 /// Use this data source if you are displaying the data in a UITableView.
+/// Set `tableView` property to reference the UITableView that is presenting the content.
 class NewsArticleTableViewDataSource: NewsArticleDataSource {
     weak var tableView: UITableView?
     
@@ -28,6 +29,7 @@ class NewsArticleTableViewDataSource: NewsArticleDataSource {
 }
 
 /// Use this data source if you are displaying the data in a UICollectionView.
+/// Set `collectionView` property to reference the UICollectionView that is presenting the content.
 class NewsArticleCollectionViewDataSource: NewsArticleDataSource {
     weak var collectionView: UICollectionView?
     
