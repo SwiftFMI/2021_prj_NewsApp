@@ -44,6 +44,7 @@ class NewsArticleDataSource {
         if let articles = articlesDb {
             token = RealmHelper.observeResults(articles, actions: { [weak self] changes in
                 if let self = self {
+                    self.delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
                     self.articlesDb = articles
                     self.articles = self.articlesDb?.toArray()
                     self.delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
