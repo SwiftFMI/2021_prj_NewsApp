@@ -7,11 +7,37 @@
 
 import Foundation
 import RealmSwift
+import UIKit
 
 protocol NewsArticleDataSourceDelegate: AnyObject {
     func newsArticleDataSourceDeletage(willUpdateArticles dataSource: NewsArticleDataSource)
     func newsArticleDataSourceDelegate(didUpdateArticles dataSource: NewsArticleDataSource)
 }
+
+class NewsArticleTableViewDataSource: NewsArticleDataSource {
+    weak var tableView: UITableView?
+    
+    override func setObserver(forArticles articles: Results<ArticleDB>) -> NotificationToken? {
+        guard let tableView = tableView else {
+            return nil
+        }
+
+        return RealmHelper.observeRealmTableResults(tableView: tableView, results: articles)
+    }
+}
+
+class NewsArticleCollectionViewDataSource: NewsArticleDataSource {
+    weak var collectionView: UICollectionView?
+    
+    override func setObserver(forArticles articles: Results<ArticleDB>) -> NotificationToken? {
+        guard let collectionView = collectionView else {
+            return nil
+        }
+        
+        return RealmHelper.observeRealmCollectionResults(collectionView: collectionView, results: articles)
+    }
+}
+
 
 class NewsArticleDataSource {
     private var articlesDb: Results<ArticleDB>?
@@ -33,8 +59,6 @@ class NewsArticleDataSource {
     func loadArticles() {
         token = nil
         
-        delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
-        
         // currently it loads all articles saved locally
         articlesDb = getArticles()
         articles = articlesDb?.toArray()
@@ -42,17 +66,19 @@ class NewsArticleDataSource {
         delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
         
         if let articles = articlesDb {
-            token = RealmHelper.observeResults(articles, actions: { [weak self] changes in
-                if let self = self {
-                    self.delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
-                    
-                    self.articlesDb = articles
-                    self.articles = self.articlesDb?.toArray()
-                    
-                    self.delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
-                }
-            })
+            token = setObserver(forArticles: articles)
         }
+    }
+    
+    func setObserver(forArticles articles: Results<ArticleDB>) -> NotificationToken? {
+        RealmHelper.observeResults(articles, actions: { [weak self] changes in
+            if let self = self {
+                self.articlesDb = articles
+                self.articles = self.articlesDb?.toArray()
+                
+                self.delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
+            }
+        })
     }
 }
 
@@ -82,6 +108,8 @@ extension NewsArticleDataSource {
     /// Example sync of local articles with ones fetched from API, use similar one on things like pull to refresh, hard syncs, etc...
     /// Updates local articles and triggers NewsArticleDataSourceDelegate methods if the notification token is observing.
     func syncArticles(forCountry country: NewsCountry) {
+        delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
+        
         NewsAPISyncer().getTopHeadlines(country: country, completion: { articles in
             guard let realm = try? Realm() else {
                 return
