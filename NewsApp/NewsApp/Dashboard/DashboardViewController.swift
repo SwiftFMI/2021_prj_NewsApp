@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class DashboardViewController: UIViewController {
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +21,10 @@ class DashboardViewController: UIViewController {
         
         let sideMenuButtonBarButtonItem = UIBarButtonItem(customView: sideMenuButton)
         navigationItem.rightBarButtonItem = sideMenuButtonBarButtonItem
+        
+        NewsAPISyncer().getAllArticles(forSource: .BBC, completion: { articles in
+            NSLog("\(String(describing: articles))")
+        })
     }
     
     @objc private func showRightSideBar() {
