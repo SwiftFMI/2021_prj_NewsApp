@@ -92,7 +92,9 @@ extension NewsArticleDataSource {
                                         url: article.url,
                                         urlToImage: article.urlToImage,
                                         publishedAt: article.publishedAt,
-                                        content: article.content))
+                                        content: article.content),
+                              update: .modified
+                    )
                 }
             }
         })
