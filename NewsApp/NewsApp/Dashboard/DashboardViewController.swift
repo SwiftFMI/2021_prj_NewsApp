@@ -27,8 +27,6 @@ class DashboardViewController: UIViewController {
         articleDataSource.delegate = self
         articleDataSource.loadArticles()
         articleDataSource.syncArticles(forCountry: .bg)
-        
-        NSLog("\(articleDataSource.articles)")
     }
     
     @objc private func showRightSideBar() {
@@ -43,6 +41,6 @@ extension DashboardViewController: NewsArticleDataSourceDelegate {
     }
     
     func newsArticleDataSourceDelegate(didUpdateArticles dataSource: NewsArticleDataSource) {
-        NSLog("didUpdate")
+        NSLog("\(articleDataSource.articles)")
     }
 }
