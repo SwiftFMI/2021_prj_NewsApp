@@ -26,16 +26,7 @@ class DashboardViewController: UIViewController {
         
         articleDataSource.delegate = self
         articleDataSource.loadArticles()
-        articleDataSource.syncArticles(forCountry: .us)
-        
-        let article = articleDataSource.articles?.randomElement()
-        NewsAPISyncer().getImage(forUrl: article?.urlToImage, completion: { [weak self] posterImage in
-            let ndvc = NewsDetailsViewController(withArticle: article, posterImage: posterImage)
-            DispatchQueue.main.async {
-                self?.navigationController?.pushViewController(ndvc, animated: true)
-            }
-        })
-
+        articleDataSource.syncArticles(forCountry: .bg)
     }
     
     @objc private func showRightSideBar() {
