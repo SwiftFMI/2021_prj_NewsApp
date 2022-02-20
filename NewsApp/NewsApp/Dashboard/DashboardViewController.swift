@@ -41,6 +41,6 @@ extension DashboardViewController: NewsArticleDataSourceDelegate {
     }
     
     func newsArticleDataSourceDelegate(didUpdateArticles dataSource: NewsArticleDataSource) {
-        NSLog("\(articleDataSource.articles)")
+        NSLog("didUpdate")
     }
 }
