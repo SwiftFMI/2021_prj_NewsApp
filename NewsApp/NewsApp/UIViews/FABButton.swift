@@ -11,7 +11,7 @@ import UIKit
 /// A circular button that could preview an image that gets resized to fit in the circle.
 /// Allows toggling it enabled/disabled via `setEnabledStyle(enabled:Bool)`
 class FABButton: UIButton {
-    init(with image: UIImage?, and title: String?, tintColor: UIColor = .systemBlue, font: UIFont = UIFont.newsAppFont(ofSize: 8, weight: .light)) {
+    init(with image: UIImage?, and title: String? = nil, tintColor: UIColor = .systemBlue, font: UIFont = UIFont.newsAppFont(ofSize: 8, weight: .light)) {
         super.init(frame: .zero)
         
         configuration = Configuration.gray()
