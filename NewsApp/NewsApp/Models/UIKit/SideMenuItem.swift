@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum SideMenuItemType {
-    case dashboard, favourites, recommended, politics, technology, business, health
+    case dashboard, favourites, recommended, politics, technology, business, health, entertainment
 }
 
 struct SideMenuItem {
@@ -21,18 +21,17 @@ struct SideMenuItem {
 
 struct MenuItems {
     let mainItems = [
-        // TODO: change image assets
-        SideMenuItem(image: SystemAssets.personCropCircle, tintColor: .systemBlue, title: "Dashboard", type: .dashboard),
-        SideMenuItem(image: SystemAssets.gearCircle, tintColor: .systemBlue, title: "Favourites", type: .favourites),
-        SideMenuItem(image: SystemAssets.arrowShapeUpRightCircle, tintColor: .systemBlue, title: "Recommended", type: .recommended),
+        SideMenuItem(image: SystemAssets.listDashHeaderRectangle, tintColor: .primaryStaticText, title: "Dashboard", type: .dashboard),
+        SideMenuItem(image: SystemAssets.heartFill, tintColor: .primaryStaticText, title: "Favourites", type: .favourites),
+        SideMenuItem(image: SystemAssets.presonFillViewfinder, tintColor: .primaryStaticText, title: "Recommended", type: .recommended),
     ]
     
     let categories = [
-        // TODO: change image assets
-        SideMenuItem(image: SystemAssets.xmarkCircle, tintColor: .systemRed, title: "Politics", type: .politics),
-        SideMenuItem(image: SystemAssets.key, tintColor: .systemGreen, title: "Technology", type: .technology),
-        SideMenuItem(image: SystemAssets.key, tintColor: .systemGreen, title: "Business", type: .business),
-        SideMenuItem(image: SystemAssets.key, tintColor: .systemGreen, title: "Health", type: .health),
+        SideMenuItem(image: SystemAssets.personTwoCircle, tintColor: .primaryStaticText, title: "Politics", type: .politics),
+        SideMenuItem(image: SystemAssets.externalDrive, tintColor: .primaryStaticText, title: "Technology", type: .technology),
+        SideMenuItem(image: SystemAssets.dollarSignFill, tintColor: .primaryStaticText, title: "Business", type: .business),
+        SideMenuItem(image: SystemAssets.leafCircleFill, tintColor: .primaryStaticText, title: "Health", type: .health),
+        SideMenuItem(image: SystemAssets.tvInsetFilled, tintColor: .primaryStaticText, title: "Entertainment", type: .entertainment)
     ]
     
     func getIndex(type: SideMenuItemType) -> (section: Int, row: Int) {
@@ -51,6 +50,8 @@ struct MenuItems {
             return (1, 2)
         case .health:
             return (1, 3)
+        case .entertainment:
+            return (1, 4)
         }
         
     }

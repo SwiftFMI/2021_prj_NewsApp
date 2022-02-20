@@ -66,6 +66,8 @@ class SideMenuTableViewCell: UITableViewCell {
     
     func setUpWith(title: String, image: UIImage?, tintColor: UIColor) {
         sectionLabel.text = title
+        sectionLabel.textColor = tintColor
+        
         iconView.image = image?.withRenderingMode(.alwaysTemplate)
         iconView.tintColor = tintColor
     }

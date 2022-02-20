@@ -13,6 +13,7 @@ extension UIColor {
     static let primaryBackgrond = UIColor(red: 249, green: 249, blue: 249)
     static let secondaryBackground = UIColor(red: 230, green: 230, blue: 230)
     static let primaryStaticText = UIColor.black
+    static let secondaryStaticText = UIColor.gray
     static let primaryInteractiveText = UIColor.blue
     static let primaryHighlight = UIColor.orange
     
