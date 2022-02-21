@@ -10,17 +10,17 @@ import UIKit
 
 extension UIFont {
     class func newsAppFont(ofSize: CGFloat, weight: UIFont.Weight = .regular) -> UIFont {
-        // TODO: example font, change with whatever we choose to use
-        var fontName = "SFUI-Regular"
+        var fontName = "PlayfairDisplay-Regular"
+        
         switch weight {
         case .bold:
-            fontName = "SFUI-Bold"
+            fontName = "PlayfairDisplay-Bold"
         case .light:
-            fontName = "SFUI-Light"
+            fontName = "PlayfairDisplay-Regular"
         case .medium:
-            fontName = "SFUI-Medium"
+            fontName = "PlayfairDisplay-Medium"
         default:
-            fontName = "SFUI-Regular"
+            fontName = "PlayfairDisplay-Regular"
         }
         guard let font = UIFont(name: fontName, size: ofSize) else {
             return UIFont.systemFont(ofSize: ofSize, weight: weight)

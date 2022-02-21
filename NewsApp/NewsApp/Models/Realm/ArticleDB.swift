@@ -8,8 +8,13 @@
 import Foundation
 import RealmSwift
 
+struct iPad: Hashable {
+    var serialNumber: String
+    var capacity: Int
+}
+
 class ArticleDB: Object {
-    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var id: String?
     @objc dynamic var author: String?
     @objc dynamic var title: String?
     @objc dynamic var articleDescription: String?
@@ -28,6 +33,7 @@ class ArticleDB: Object {
     
     convenience init(author: String? = nil, title: String? = nil, articleDescription: String? = nil, url: String? = nil, urlToImage: String? = nil, publishedAt: String? = nil, content: String? = nil, category: NewsCategory? = nil) {
         self.init()
+        
         self.author = author
         self.title = title
         self.articleDescription = articleDescription
@@ -36,6 +42,12 @@ class ArticleDB: Object {
         self.publishedAt = publishedAt
         self.content = content
         self.category = category?.rawValue
+        
+        var hasher = Hasher()
+        hasher.combine(title)
+        hasher.combine(publishedAt)
+        
+        self.id = hasher.finalize().description
     }
     
     func setCategory(fromEnum category: NewsCategory) {
