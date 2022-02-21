@@ -13,14 +13,11 @@ class DiscoverNewsCard: UIViewController {
     private var sources = NewsSourceDescriptor.parseFromJson()
     
     let collectionView: UICollectionView = {
-        
         let viewLayout = UICollectionViewFlowLayout()
         viewLayout.scrollDirection = .horizontal
         viewLayout.minimumLineSpacing = 23
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
-        collectionView.backgroundColor = .white
-        
         return collectionView
     }()
     
@@ -28,7 +25,7 @@ class DiscoverNewsCard: UIViewController {
         super.viewDidLoad()
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .secondaryGray
+        collectionView.backgroundColor = .primaryGray
         view.addSubview(collectionView)
         
         collectionView.dataSource = self
@@ -70,8 +67,9 @@ extension DiscoverNewsCard: UICollectionViewDataSource {
 
 extension DiscoverNewsCard: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let focusedImage = ImageViewController(image: sources[indexPath.item].image)
-        present(focusedImage, animated: true, completion: nil)
+        //TODO: Present TableView with news from source
+        //let focusedImage = ImageViewController(image: sources[indexPath.item].image)
+       // present(focusedImage, animated: true, completion: nil)
     }
 }
 
@@ -92,6 +90,17 @@ class DiscoverNewsCardCell: UICollectionViewCell {
     private var logo = UIImageView()
     private var name = UILabel()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupUI()
+        setupConstraints()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupCell(sourceData: Source) {
         logo.image = UIImage(imageLiteralResourceName: sourceData.image)
         name.text = sourceData.name
@@ -111,23 +120,11 @@ class DiscoverNewsCardCell: UICollectionViewCell {
         name.translatesAutoresizingMaskIntoConstraints = false
         name.textAlignment = .center
         name.textColor = .black
-        name.font = UIFont.newsAppFont(ofSize: 12, weight: .medium)
+        name.font = UIFont.newsAppFont(ofSize: 13, weight: .medium)
         contentView.addSubview(name)
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupUI()
-        setupConstraints()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+   
     private func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             logo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             logo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
@@ -138,41 +135,6 @@ class DiscoverNewsCardCell: UICollectionViewCell {
             name.topAnchor.constraint(equalTo: logo.bottomAnchor),
             name.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             name.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        ])
-    }
-}
-
-class ImageViewController: UIViewController {
-    
-    var imageView: UIImageView!
-    var imageString: String
-    
-    init(image: String) {
-        
-        self.imageString = image
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let image = UIImage(named: imageString)
-        self.imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        view.addSubview(imageView)
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            imageView.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
     }
 }

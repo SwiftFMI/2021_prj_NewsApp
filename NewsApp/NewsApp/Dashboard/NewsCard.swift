@@ -8,20 +8,15 @@
 import Foundation
 import UIKit
 
-class NewsCard: UIViewController, NewsArticleDataSourceDelegate {
-    func newsArticleDataSourceDeletage(willUpdateArticles dataSource: NewsArticleDataSource) {
-    }
-    
-    func newsArticleDataSourceDelegate(didUpdateArticles dataSource: NewsArticleDataSource) {
-    }
-    
+class NewsCard: UIViewController {
+
     private let articleDataSource = NewsArticleTableViewDataSource()
-   
+    
     var tableView = UITableView(frame: .zero, style: .plain)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  articleDataSource.delegate = self
+
         articleDataSource.loadArticles()
         articleDataSource.syncArticles(forCountry: .bg)
         setupTableView()
@@ -29,18 +24,20 @@ class NewsCard: UIViewController, NewsArticleDataSourceDelegate {
     
     func setupTableView() {
         view.addSubview(tableView)
-        tableView.backgroundColor = .primaryBackgrond
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.backgroundColor = .primaryBackgrond
         
         tableView.delegate = self
         tableView.dataSource = self
         articleDataSource.tableView = tableView
         tableView.register(NewsCardCell.self, forCellReuseIdentifier: "cell")
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+        ])
     }
 }
 
@@ -55,6 +52,10 @@ extension NewsCard: UITableViewDataSource {
         }
         cell.setupCell(article: articleDataSource.articles?[indexPath.row] ?? nil)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //TODO: Present NewsDetailsView
     }
 }
 
@@ -84,26 +85,7 @@ extension NewsCard: UITableViewDelegate {
         containerView.addSubview(headerTitle)
         return headerTitle
     }
-
-    
-    //This doesn't work as expected,view is not scrollable and reusability of cells causes problems with reloading the collect
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let containerView = UIView()
-//
-//        let discoverNewsCard = DiscoverNewsCard()
-//       // discoverNewsCard.view.translatesAutoresizingMaskIntoConstraints = false
-//
-//        containerView.addSubview(discoverNewsCard.view)
-//        discoverNewsCard.view.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-//        discoverNewsCard.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-//        discoverNewsCard.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-//        discoverNewsCard.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-//        discoverNewsCard.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
-//
-//        return containerView
-//    }
 }
-
 
 //MARK: UITableViewCell
 class NewsCardCell: UITableViewCell {
@@ -157,7 +139,7 @@ class NewsCardCell: UITableViewCell {
             rightImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             rightImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             rightImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            rightImage.widthAnchor.constraint(equalToConstant: 110),
+            rightImage.widthAnchor.constraint(equalToConstant: 120),
             rightImage.heightAnchor.constraint(equalToConstant: 130),
 
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
@@ -205,14 +187,14 @@ class NewsCardCell: UITableViewCell {
         date.textColor = .primaryGray
         date.font = UIFont.newsAppFont(ofSize: 13, weight: .light)
         
-        let url = URL(string: article.urlToImage ?? "")
-        let data = try? Data(contentsOf: url!)
-        if let imageData = data {
-            rightImage.image = UIImage(data: imageData)
+        if let url = URL(string: article.urlToImage ?? "") {
+            rightImage.load(url: url )
         }
     }
-
-    func formattedDateFromString(dateString: String) -> String? {
+    
+    //TODO: Move this somewhere more relevant
+    
+    private func formattedDateFromString(dateString: String) -> String? {
 
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" + "Z"

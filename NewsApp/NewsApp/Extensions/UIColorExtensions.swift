@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    //TODO: also add our main colours here for all to use
     static let primaryBackgrond = UIColor(red: 249, green: 249, blue: 249)
     static let secondaryBackground = UIColor(red: 230, green: 230, blue: 230)
     static let primaryStaticText = UIColor.black
