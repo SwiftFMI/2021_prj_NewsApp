@@ -19,6 +19,8 @@ class ArticleDB: Object {
     @objc dynamic var content: String?
     
     @objc dynamic var category: String?
+    @objc dynamic var source: String?
+    @objc dynamic var favourite: Bool = false
     
     override static func primaryKey() -> String? {
         return "id"

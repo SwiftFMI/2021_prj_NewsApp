@@ -23,7 +23,7 @@ class NewsArticleTableViewDataSource: NewsArticleDataSource {
         guard let tableView = tableView else {
             return nil
         }
-
+        
         return RealmHelper.observeRealmTableResults(tableView: tableView, results: articles)
     }
 }
@@ -97,12 +97,35 @@ extension NewsArticleDataSource {
         guard let predicate = predicate else {
             return realm.objects(ArticleDB.self).sorted(by: sort)
         }
-
+        
         return realm.objects(ArticleDB.self).filter(predicate).sorted(by: sort)
     }
     
     func getArticles(forCategory category: NewsCategory, sortOptions: [RealmSwift.SortDescriptor]? = nil) -> Results<ArticleDB>? {
         getArticles(forPredicate: NSPredicate(format: "category == %@", category.rawValue), sortOptions: sortOptions)
+    }
+}
+
+// MARK: Methods to save articles to local data
+extension NewsArticleDataSource {
+    func saveArticles(_ articles: [Article]?) {
+        guard let realm = try? Realm() else {
+            return
+        }
+        
+        realm.safeWrite {
+            articles?.forEach { article in
+                realm.add(ArticleDB(author: article.author,
+                                    title: article.title,
+                                    articleDescription: article.description,
+                                    url: article.url,
+                                    urlToImage: article.urlToImage,
+                                    publishedAt: article.publishedAt,
+                                    content: article.content),
+                          update: .modified
+                )
+            }
+        }
     }
 }
 
@@ -113,24 +136,8 @@ extension NewsArticleDataSource {
     func syncArticles(forCountry country: NewsCountry) {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
-        NewsAPISyncer().getTopHeadlines(country: country, completion: { articles in
-            guard let realm = try? Realm() else {
-                return
-            }
-            
-            articles?.forEach { article in
-                realm.safeWrite {
-                    realm.add(ArticleDB(author: article.author,
-                                        title: article.title,
-                                        articleDescription: article.description,
-                                        url: article.url,
-                                        urlToImage: article.urlToImage,
-                                        publishedAt: article.publishedAt,
-                                        content: article.content),
-                              update: .modified
-                    )
-                }
-            }
+        NewsAPISyncer().getTopHeadlines(country: country, completion: { [weak self] articles in
+            self?.saveArticles(articles)
         })
     }
 }

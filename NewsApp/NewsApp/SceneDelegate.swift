@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = sideController
         window?.makeKeyAndVisible()
-        
+       
         showSignIn()
     }
 

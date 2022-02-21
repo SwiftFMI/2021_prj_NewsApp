@@ -1,0 +1,151 @@
+//
+//  NewsDetailsView.swift
+//  NewsApp
+//
+//  Created by Vladimir Yanakiev on 20.02.22.
+//
+
+import Foundation
+import UIKit
+
+protocol NewsDetailsViewDelegate: AnyObject {
+    func newsDetailsViewDelegate(didTapOpenFullButton newsDetailsView: NewsDetailsView)
+    func newsDetailsViewDelegate(didTapSaveButton newsDetailsView: NewsDetailsView)
+}
+
+class NewsDetailsView: UIView {
+    private let posterImageView = UIImageView()
+    private let dateLabel = UILabel()
+    private let saveButton = FABButton(with: SystemAssets.heartFill, tintColor: .black)
+    private let titleLabel = UILabel()
+    private let authorLabel = UILabel()
+    private let articleContentLabel = UILabel()
+    private let openFullButton = UIButton()
+    private let sourceLabel = UILabel()
+    private let sourceUrlLabel = UILabel()
+    
+    weak var interactionDelegate: NewsDetailsViewDelegate?
+    
+    init() {
+        super.init(frame: .zero)
+       
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .primaryBackgrond
+        
+        configureImageView(posterImageView)
+        configureSecondaryStyleLabel(dateLabel)
+        configureButton(saveButton)
+        configureTitleLabel(titleLabel)
+        configureSecondaryStyleLabel(authorLabel)
+        configureContentLabel(articleContentLabel)
+        configureTextButton(openFullButton)
+        configureSecondaryStyleLabel(sourceLabel)
+        
+        saveButton.addTarget(self, action: #selector(saveArticle), for: .touchUpInside)
+        openFullButton.addTarget(self, action: #selector(openFull), for: .touchUpInside)
+        
+        addSubview(posterImageView)
+        addSubview(dateLabel)
+        addSubview(saveButton)
+        addSubview(titleLabel)
+        addSubview(authorLabel)
+        addSubview(articleContentLabel)
+        addSubview(openFullButton)
+        addSubview(sourceLabel)
+        
+        let safeArea = safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            posterImageView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            posterImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            posterImageView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            
+            saveButton.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
+            saveButton.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -10),
+            
+            dateLabel.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor, constant: 10),
+            
+            titleLabel.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+            
+            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            authorLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+            
+            articleContentLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 10),
+            articleContentLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+            articleContentLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+            
+            openFullButton.topAnchor.constraint(equalTo: articleContentLabel.bottomAnchor, constant: 5),
+            openFullButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+            
+            sourceLabel.topAnchor.constraint(equalTo: openFullButton.bottomAnchor, constant: 15),
+            sourceLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+            
+            bottomAnchor.constraint(equalTo: sourceLabel.bottomAnchor),
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func openFull() {
+        interactionDelegate?.newsDetailsViewDelegate(didTapOpenFullButton: self)
+    }
+    
+    @objc private func saveArticle() {
+        interactionDelegate?.newsDetailsViewDelegate(didTapSaveButton: self)
+    }
+    
+    private func configureImageView(_ imageView: UIImageView) {
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func configureTitleLabel(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .primaryStaticText
+        label.font = .newsAppFont(ofSize: 20)
+        label.numberOfLines = 0
+    }
+    
+    private func configureContentLabel(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .primaryStaticText
+        label.font = .newsAppFont(ofSize: 14)
+        label.numberOfLines = 0
+    }
+    
+    private func configureSecondaryStyleLabel(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .primaryStaticText
+        label.font = .newsAppFont(ofSize: 14)
+        label.numberOfLines = 0
+    }
+    
+    private func configureButton(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+    }
+    
+    private func configureTextButton(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.primaryInteractiveText, for: .normal)
+        button.titleLabel?.font = .newsAppFont(ofSize: 14)
+    }
+    
+    func setArticle(_ article: ArticleDB?, withPosterImage image: UIImage?) {
+        guard let article = article else {
+            return
+        }
+        
+        posterImageView.image = image?.resizeImage(height: 250)
+        dateLabel.text = article.publishedAt
+        titleLabel.text = article.title
+        authorLabel.text = article.author
+        articleContentLabel.text = article.articleDescription
+        sourceLabel.text = article.source
+        openFullButton.setTitle("Open full in browser.", for: .normal)
+        saveButton.isHidden = false
+    }
+}
