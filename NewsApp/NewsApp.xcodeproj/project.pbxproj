@@ -247,12 +247,12 @@
 				202CBB0727BD5F3C00DA4FCD /* UIViews */,
 				202CBAF327BD5F2B00DA4FCD /* AppDelegate.swift */,
 				202CBAF527BD5F2B00DA4FCD /* SceneDelegate.swift */,
+				20FF726F27C56A6100369EC2 /* AuthState.swift */,
 				202CBAF927BD5F2B00DA4FCD /* Main.storyboard */,
 				202CBAFC27BD5F2C00DA4FCD /* Assets.xcassets */,
 				202CBAFE27BD5F2C00DA4FCD /* LaunchScreen.storyboard */,
 				20FF726827C5677A00369EC2 /* GoogleService-Info.plist */,
 				202CBB0127BD5F2C00DA4FCD /* Info.plist */,
-				20FF726F27C56A6100369EC2 /* AuthState.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
