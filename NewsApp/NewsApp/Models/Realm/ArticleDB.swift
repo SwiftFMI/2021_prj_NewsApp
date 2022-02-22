@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class ArticleDB: Object {
-    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var id: String?
     @objc dynamic var author: String?
     @objc dynamic var title: String?
     @objc dynamic var articleDescription: String?
@@ -18,9 +18,10 @@ class ArticleDB: Object {
     @objc dynamic var publishedAt: String?
     @objc dynamic var content: String?
     
-    @objc dynamic var category: String?
-    @objc dynamic var source: String?
     @objc dynamic var favourite: Bool = false
+    
+    @objc dynamic private var category: String?
+    @objc dynamic private var source: String?
     
     override static func primaryKey() -> String? {
         return "id"
@@ -28,6 +29,7 @@ class ArticleDB: Object {
     
     convenience init(author: String? = nil, title: String? = nil, articleDescription: String? = nil, url: String? = nil, urlToImage: String? = nil, publishedAt: String? = nil, content: String? = nil, category: NewsCategory? = nil) {
         self.init()
+        
         self.author = author
         self.title = title
         self.articleDescription = articleDescription
@@ -36,13 +38,23 @@ class ArticleDB: Object {
         self.publishedAt = publishedAt
         self.content = content
         self.category = category?.rawValue
+        
+        self.id = "\(title) - \(publishedAt)"
     }
     
-    func setCategory(fromEnum category: NewsCategory) {
+    func setCategory(_ category: NewsCategory) {
         self.category = category.rawValue
     }
     
-    func getCategoryEnum() -> NewsCategory? {
+    func setSource(_ source: NewsSource) {
+        self.source = source.rawValue
+    }
+    
+    func getCategory() -> NewsCategory? {
         category != nil ? NewsCategory.init(rawValue: category!) : nil
+    }
+    
+    func getSource() -> NewsSource? {
+        source != nil ? NewsSource.init(rawValue: source!) : nil
     }
 }

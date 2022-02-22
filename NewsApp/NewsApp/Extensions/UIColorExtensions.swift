@@ -9,14 +9,16 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    //TODO: also add our main colours here for all to use
     static let primaryBackgrond = UIColor(red: 249, green: 249, blue: 249)
     static let secondaryBackground = UIColor(red: 230, green: 230, blue: 230)
     static let primaryStaticText = UIColor.black
     static let secondaryStaticText = UIColor.gray
     static let primaryInteractiveText = UIColor.blue
-    static let primaryHighlight = UIColor.orange
-    
+    static let secondaryGray = UIColor(red: 204, green: 204, blue: 204) //light grey
+    static let primaryGray = UIColor(red: 153 , green: 153, blue: 153) //dark grey
+    static let primaryHighlight = UIColor(red: 255, green: 117, blue: 24) // orange
+    static let secondaryHighlight = UIColor(red: 255, green: 198, blue: 93) //light orange
+        
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
