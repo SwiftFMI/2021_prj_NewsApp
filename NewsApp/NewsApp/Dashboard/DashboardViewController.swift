@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class DashboardViewController: UIViewController {
-    
     let discoverViewController = DiscoverNewsViewController()
     let feedViewController = NewsFeedViewController()
     
