@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 class DashboardViewController: UIViewController {
-    private let articleDataSource = NewsArticleDataSource()
     private let feedTableView = NewsFeedTableView()
     private let newsSourcesViewController = NewsSourcesViewController()
+    
+    private let articleDataSource = NewsArticleDataSource()
     
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
