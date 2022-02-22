@@ -267,6 +267,7 @@
 				202CBB0D27BD5FB900DA4FCD /* FABButton.swift */,
 				202CBB0F27BD5FCE00DA4FCD /* SeparatorView.swift */,
 				202CBB1127BD5FF600DA4FCD /* OvalTextField.swift */,
+				20F0198627C290A000CD0EBC /* NewsDetailsView.swift */,
 			);
 			path = UIViews;
 			sourceTree = "<group>";
@@ -385,7 +386,6 @@
 			isa = PBXGroup;
 			children = (
 				20F0198427C28F6B00CD0EBC /* NewsDetailsViewController.swift */,
-				20F0198627C290A000CD0EBC /* NewsDetailsView.swift */,
 			);
 			path = NewsDetails;
 			sourceTree = "<group>";
