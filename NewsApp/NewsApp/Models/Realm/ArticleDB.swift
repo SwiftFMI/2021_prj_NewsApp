@@ -39,11 +39,7 @@ class ArticleDB: Object {
         self.content = content
         self.category = category?.rawValue
         
-        var hasher = Hasher()
-        hasher.combine(title)
-        hasher.combine(publishedAt)
-        
-        self.id = hasher.finalize().description
+        self.id = "\(title) - \(publishedAt)"
     }
     
     func setCategory(_ category: NewsCategory) {
