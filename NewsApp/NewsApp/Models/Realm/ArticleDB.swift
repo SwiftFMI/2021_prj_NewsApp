@@ -18,9 +18,10 @@ class ArticleDB: Object {
     @objc dynamic var publishedAt: String?
     @objc dynamic var content: String?
     
-    @objc dynamic var category: String?
-    @objc dynamic var source: String?
     @objc dynamic var favourite: Bool = false
+    
+    @objc dynamic private var category: String?
+    @objc dynamic private var source: String?
     
     override static func primaryKey() -> String? {
         return "id"
@@ -45,11 +46,19 @@ class ArticleDB: Object {
         self.id = hasher.finalize().description
     }
     
-    func setCategory(fromEnum category: NewsCategory) {
+    func setCategory(_ category: NewsCategory) {
         self.category = category.rawValue
     }
     
-    func getCategoryEnum() -> NewsCategory? {
+    func setSource(_ source: NewsSource) {
+        self.source = source.rawValue
+    }
+    
+    func getCategory() -> NewsCategory? {
         category != nil ? NewsCategory.init(rawValue: category!) : nil
+    }
+    
+    func getSource() -> NewsSource? {
+        source != nil ? NewsSource.init(rawValue: source!) : nil
     }
 }
