@@ -103,13 +103,12 @@ extension NewsArticleDataSource {
 
 // MARK: Methods to sync local data with API
 extension NewsArticleDataSource {
-    /// Example sync of local articles with ones fetched from API, use similar one on things like pull to refresh, hard syncs, etc...
-    /// Updates local articles and triggers NewsArticleDataSourceDelegate methods if the notification token is observing.
-    func syncArticles(forCountry country: NewsCountry) {
+    func syncArticles(forCountry country: NewsCountry, completion: (() -> Void?)? = nil) {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
         NewsAPISyncer().getTopHeadlines(country: country, completion: { [weak self] articles in
             self?.saveArticles(articles)
+            completion?()
         })
     }
 }

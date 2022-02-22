@@ -12,6 +12,12 @@ class NewsFeedViewController: UIViewController {
     private let articleDataSource = NewsArticleDataSource()
     private let feedTableView = NewsFeedTableView()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(syncTable), for: UIControl.Event.valueChanged)
+        return refreshControl
+    }()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         
@@ -29,6 +35,7 @@ class NewsFeedViewController: UIViewController {
 
         feedTableView.dataSource = self
         feedTableView.delegate = self
+        feedTableView.addSubview(refreshControl)
         
         view.addSubview(feedTableView)
         
@@ -38,6 +45,15 @@ class NewsFeedViewController: UIViewController {
             feedTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             feedTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
         ])
+    }
+    
+    @objc private func syncTable() {
+        // TODO: what do we sync and load exactly ?
+        articleDataSource.syncArticles(forCountry: .de, completion: { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
+            }
+        })
     }
 }
 
