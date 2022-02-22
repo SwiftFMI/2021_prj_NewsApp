@@ -1,5 +1,5 @@
 //
-//  DiscoverNewsViewController.swift
+//  NewsSourcesViewController.swift
 //  NewsApp
 //
 //  Created by ZehraIliyaz  on 18.02.22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DiscoverNewsViewController: UIViewController {
+class NewsSourcesViewController: UIViewController {
     private let sources = NewsSourceDescriptor.parseFromJson()
     private let discoverCollectionView = DiscoverNewsCollectionView(frame: .zero)
     
@@ -29,7 +29,7 @@ class DiscoverNewsViewController: UIViewController {
     }
 }
 
-extension DiscoverNewsViewController: UICollectionViewDataSource {
+extension NewsSourcesViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -49,14 +49,14 @@ extension DiscoverNewsViewController: UICollectionViewDataSource {
     }
 }
 
-extension DiscoverNewsViewController: UICollectionViewDelegate {
+extension NewsSourcesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Present TableView with news from source
         NSLog("sourceView")
     }
 }
 
-extension DiscoverNewsViewController: UICollectionViewDelegateFlowLayout {
+extension NewsSourcesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 100, height: 100)
     }

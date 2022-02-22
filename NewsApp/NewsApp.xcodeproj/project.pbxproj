@@ -69,9 +69,8 @@
 		E363326927C2F6DB0051B849 /* PlayfairDisplay-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325D27C2F6DB0051B849 /* PlayfairDisplay-MediumItalic.ttf */; };
 		E363326A27C2F6DB0051B849 /* PlayfairDisplay-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325E27C2F6DB0051B849 /* PlayfairDisplay-BlackItalic.ttf */; };
 		E363326B27C2F6DB0051B849 /* PlayfairDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325F27C2F6DB0051B849 /* PlayfairDisplay-ExtraBold.ttf */; };
-		E3808AD327C046B300E3667A /* DiscoverNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3808AD227C046B300E3667A /* DiscoverNewsViewController.swift */; };
+		E3808AD327C046B300E3667A /* NewsSourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3808AD227C046B300E3667A /* NewsSourcesViewController.swift */; };
 		E3808AD527C04BDB00E3667A /* NewsSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3808AD427C04BDB00E3667A /* NewsSources.swift */; };
-		E3808AD727C0F24000E3667A /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3808AD627C0F24000E3667A /* NewsFeedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -152,9 +151,8 @@
 		E363325D27C2F6DB0051B849 /* PlayfairDisplay-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-MediumItalic.ttf"; sourceTree = "<group>"; };
 		E363325E27C2F6DB0051B849 /* PlayfairDisplay-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-BlackItalic.ttf"; sourceTree = "<group>"; };
 		E363325F27C2F6DB0051B849 /* PlayfairDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
-		E3808AD227C046B300E3667A /* DiscoverNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverNewsViewController.swift; sourceTree = "<group>"; };
+		E3808AD227C046B300E3667A /* NewsSourcesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSourcesViewController.swift; sourceTree = "<group>"; };
 		E3808AD427C04BDB00E3667A /* NewsSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSources.swift; sourceTree = "<group>"; };
-		E3808AD627C0F24000E3667A /* NewsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,9 +334,8 @@
 		202CBB3A27BD689200DA4FCD /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				E3808AD627C0F24000E3667A /* NewsFeedViewController.swift */,
 				202CBB3B27BD68A300DA4FCD /* DashboardViewController.swift */,
-				E3808AD227C046B300E3667A /* DiscoverNewsViewController.swift */,
+				E3808AD227C046B300E3667A /* NewsSourcesViewController.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -511,11 +508,10 @@
 				202CBB1227BD5FF600DA4FCD /* OvalTextField.swift in Sources */,
 				202CBB3E27BD6A2700DA4FCD /* UIImageViewExtensions.swift in Sources */,
 				202CBB0E27BD5FB900DA4FCD /* FABButton.swift in Sources */,
-				E3808AD727C0F24000E3667A /* NewsFeedViewController.swift in Sources */,
 				202CBB2927BD649200DA4FCD /* DateExtensions.swift in Sources */,
 				200DEB8627BEBD3F00169D33 /* NewsAPISyncer.swift in Sources */,
 				202CBB1A27BD616D00DA4FCD /* PopoverTableViewCell.swift in Sources */,
-				E3808AD327C046B300E3667A /* DiscoverNewsViewController.swift in Sources */,
+				E3808AD327C046B300E3667A /* NewsSourcesViewController.swift in Sources */,
 				202CBB2F27BD64F800DA4FCD /* AnimatedSideMenuController.swift in Sources */,
 				202CBB2527BD641F00DA4FCD /* UIFontExtensions.swift in Sources */,
 				202CBB2327BD63E800DA4FCD /* UIViewControllerExtensions.swift in Sources */,
