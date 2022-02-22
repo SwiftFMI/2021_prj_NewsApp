@@ -13,21 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = UIColor.clear
-        appearance.backgroundEffect = UIBlurEffect(style: .dark)
-
-            
-        let scrollingAppearance = UINavigationBarAppearance()
-        scrollingAppearance.configureWithTransparentBackground()
-        scrollingAppearance.backgroundColor = .secondaryBackground
-            
-        UINavigationBar.appearance().isTranslucent = true
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = scrollingAppearance
-        UINavigationBar.appearance().compactAppearance = scrollingAppearance
-        
         let menuController = SideMenuViewController()
         menuController.view.backgroundColor = .secondaryBackground
         

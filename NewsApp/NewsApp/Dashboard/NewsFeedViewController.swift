@@ -73,30 +73,19 @@ extension NewsFeedViewController: UITableViewDataSource {
 
 extension NewsFeedViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return articleDataSource.articles?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        1
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        150
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let containerView = UIView()
         
-        let headerTitle = UILabel()
-        headerTitle.text = "Top Headlines"
-        headerTitle.textColor = .primaryHighlight
-        headerTitle.font = UIFont.newsAppFont(ofSize: 25, weight: .bold)
-        headerTitle.textAlignment = .center
-        headerTitle.backgroundColor = .primaryBackgrond
+        add(asChildViewController: DiscoverNewsViewController(), contentView: containerView)
         
-        containerView.addSubview(headerTitle)
-        
-        return headerTitle
+        return containerView
     }
 }
 

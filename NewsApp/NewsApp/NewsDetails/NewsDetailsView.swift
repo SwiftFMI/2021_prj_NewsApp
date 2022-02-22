@@ -144,7 +144,7 @@ class NewsDetailsView: UIView {
         titleLabel.text = article.title
         authorLabel.text = article.author
         articleContentLabel.text = article.articleDescription
-        sourceLabel.text = article.source
+        sourceLabel.text = article.getSource()?.rawValue
         openFullButton.setTitle("Open full in browser.", for: .normal)
         saveButton.isHidden = false
     }

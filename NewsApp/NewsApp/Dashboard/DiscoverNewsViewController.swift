@@ -21,10 +21,10 @@ class DiscoverNewsViewController: UIViewController {
         discoverCollectionView.delegate = self
         
         NSLayoutConstraint.activate([
-            discoverCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            discoverCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            discoverCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            discoverCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
+            discoverCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            discoverCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            discoverCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            discoverCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
     }
 }
@@ -43,8 +43,8 @@ extension DiscoverNewsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let source = sources[indexPath.row]
-        cell.setupCell(sourceData: source)
+        cell.setupCell(sourceData: sources[indexPath.row])
+        
         return cell
     }
 }
@@ -52,17 +52,16 @@ extension DiscoverNewsViewController: UICollectionViewDataSource {
 extension DiscoverNewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Present TableView with news from source
-        //let focusedImage = ImageViewController(image: sources[indexPath.item].image)
-       // present(focusedImage, animated: true, completion: nil)
+        NSLog("sourceView")
     }
 }
 
 extension DiscoverNewsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        CGSize(width: 100, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 40, left: 25, bottom: 20, right: 30)
+        UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     }
 }

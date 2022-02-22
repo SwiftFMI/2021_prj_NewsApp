@@ -15,7 +15,7 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .primaryHighlight
+        view.backgroundColor = .primaryBackgrond
         
         let sideMenuButton = UIButton()
         sideMenuButton.setImage(SystemAssets.listBullet?.withTintColor(UIColor.systemBlue).resizeImage(width: 30), for: .normal)
@@ -24,26 +24,16 @@ class DashboardViewController: UIViewController {
         let sideMenuButtonBarButtonItem = UIBarButtonItem(customView: sideMenuButton)
         navigationItem.rightBarButtonItem = sideMenuButtonBarButtonItem
         
-        let discoverNewsContentView = UIView()
-        discoverNewsContentView.translatesAutoresizingMaskIntoConstraints = false
-        
         let newsFeedContentView = UIView()
         newsFeedContentView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(discoverNewsContentView)
         view.addSubview(newsFeedContentView)
         
-        add(asChildViewController: discoverViewController, contentView: discoverNewsContentView)
         add(asChildViewController: feedViewController, contentView: newsFeedContentView)
         
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            discoverNewsContentView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            discoverNewsContentView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            discoverNewsContentView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            discoverNewsContentView.bottomAnchor.constraint(equalTo: safeArea.centerYAnchor, constant: -50),
-            
-            newsFeedContentView.topAnchor.constraint(equalTo: discoverNewsContentView.bottomAnchor),
+            newsFeedContentView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             newsFeedContentView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             newsFeedContentView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             newsFeedContentView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
