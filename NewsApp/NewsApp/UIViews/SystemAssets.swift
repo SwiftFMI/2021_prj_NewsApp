@@ -31,4 +31,6 @@ class SystemAssets {
     static let dollarSignFill = UIImage(systemName: "dollarsign.circle.fill")
     static let leafCircleFill = UIImage(systemName: "leaf.circle.fill")
     static let tvInsetFilled = UIImage(systemName: "tv.inset.filled")
+    static let testtube2 = UIImage(systemName: "testtube.2")
+    static let sportscourt = UIImage(systemName: "sportscourt")
 }
