@@ -236,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				20FF727127C56B3A00369EC2 /* Auth */,
-				20FF726827C5677A00369EC2 /* GoogleService-Info.plist */,
 				20F0198327C26E5900CD0EBC /* NewsDetails */,
 				203EC8AD27C0151600FB20CE /* Realm */,
 				200DEB8427BEBD3200169D33 /* Syncers */,
@@ -251,6 +250,7 @@
 				202CBAF927BD5F2B00DA4FCD /* Main.storyboard */,
 				202CBAFC27BD5F2C00DA4FCD /* Assets.xcassets */,
 				202CBAFE27BD5F2C00DA4FCD /* LaunchScreen.storyboard */,
+				20FF726827C5677A00369EC2 /* GoogleService-Info.plist */,
 				202CBB0127BD5F2C00DA4FCD /* Info.plist */,
 				20FF726F27C56A6100369EC2 /* AuthState.swift */,
 			);
