@@ -45,6 +45,7 @@ class DashboardViewController: UIViewController {
         navigationItem.rightBarButtonItem = sideMenuButtonBarButtonItem
         navigationItem.title = "Dashboard"
 
+        feedTableView.showsVerticalScrollIndicator = false
         feedTableView.dataSource = self
         feedTableView.delegate = self
         feedTableView.addSubview(refreshControl)
@@ -100,7 +101,6 @@ extension DashboardViewController: UITableViewDataSource {
                 tableView.cellForRow(at: indexPath)?.isSelected = false
             }
         })
-        
     }
 }
 
