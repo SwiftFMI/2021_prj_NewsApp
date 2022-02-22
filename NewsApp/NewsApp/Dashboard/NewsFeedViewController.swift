@@ -55,7 +55,17 @@ extension NewsFeedViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: Present NewsDetailsView
+        guard let article = articleDataSource.articles?[indexPath.row] else { return }
+        
+        NewsAPISyncer().getImage(forUrl: article.urlToImage, completion: { [weak self] image in
+            let newsDetailsViewController = NewsDetailsViewController(withArticle: article, posterImage: image)
+            
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(newsDetailsViewController, animated: true)
+                tableView.cellForRow(at: indexPath)?.isSelected = false
+            }
+        })
+        
     }
 }
 
