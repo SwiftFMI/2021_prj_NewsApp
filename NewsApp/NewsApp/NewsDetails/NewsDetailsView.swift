@@ -33,7 +33,7 @@ class NewsDetailsView: UIView {
         backgroundColor = .primaryBackgrond
         
         configureImageView(posterImageView)
-        configureSecondaryStyleLabel(dateLabel)
+        configureDateLabel(dateLabel)
         configureButton(saveButton)
         configureTitleLabel(titleLabel)
         configureSecondaryStyleLabel(authorLabel)
@@ -65,14 +65,14 @@ class NewsDetailsView: UIView {
             dateLabel.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor, constant: 10),
             
-            titleLabel.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             titleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
             
             authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             authorLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             
-            articleContentLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 10),
+            articleContentLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 25),
             articleContentLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             articleContentLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
             
@@ -105,7 +105,7 @@ class NewsDetailsView: UIView {
     private func configureTitleLabel(_ label: UILabel) {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .primaryStaticText
-        label.font = .newsAppFont(ofSize: 20)
+        label.font = .newsAppFont(ofSize: 20, weight: .bold)
         label.numberOfLines = 0
     }
     
@@ -120,6 +120,13 @@ class NewsDetailsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .primaryStaticText
         label.font = .newsAppFont(ofSize: 14)
+        label.numberOfLines = 0
+    }
+    
+    private func configureDateLabel(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .primaryGray
+        label.font = .newsAppFont(ofSize: 14, weight: .bold)
         label.numberOfLines = 0
     }
     
@@ -140,7 +147,7 @@ class NewsDetailsView: UIView {
         }
         
         posterImageView.image = image?.resizeImage(height: 250)
-        dateLabel.text = article.publishedAt
+        dateLabel.text = Date.formattedDateFromString(dateString: article.publishedAt ?? "")
         titleLabel.text = article.title
         authorLabel.text = article.author
         articleContentLabel.text = article.articleDescription

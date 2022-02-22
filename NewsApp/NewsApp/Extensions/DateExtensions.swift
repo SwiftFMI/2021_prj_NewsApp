@@ -9,18 +9,16 @@ import Foundation
 
 extension Date {
     static func formattedDateFromString(dateString: String) -> String? {
-
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" + "Z"
-
+        
         if let date = inputFormatter.date(from: dateString) {
-
-          let outputFormatter = DateFormatter()
-          outputFormatter.dateFormat = "MMM dd, yyyy"
-
+            
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "MMM dd, yyyy"
+            
             return outputFormatter.string(from: date)
         }
-        
         return nil
     }
     

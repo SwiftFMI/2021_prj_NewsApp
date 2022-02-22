@@ -20,6 +20,7 @@ class DiscoverNewsCollectionView: UICollectionView {
         register(DiscoverNewsCollectionViewCell.self, forCellWithReuseIdentifier: DiscoverNewsCollectionViewCell.cellIdentifier)
         
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .primaryGray
+        showsHorizontalScrollIndicator = false
+        backgroundColor = .secondaryGray
     }
 }
