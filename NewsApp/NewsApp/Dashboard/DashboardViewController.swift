@@ -53,9 +53,9 @@ class DashboardViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             feedTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            feedTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            feedTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             feedTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            feedTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            feedTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
         ])
     }
     
