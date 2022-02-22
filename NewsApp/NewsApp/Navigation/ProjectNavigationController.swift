@@ -18,6 +18,8 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
         
         switch currentActiveSection {
             //TODO: add cases for navigation items tap
+        case .logOut:
+            AuthState.current.logOut(authControllerPresenter: self)
         default:
             break
         }

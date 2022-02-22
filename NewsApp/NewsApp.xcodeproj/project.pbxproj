@@ -60,6 +60,8 @@
 		20FF726927C5677A00369EC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FF726827C5677A00369EC2 /* GoogleService-Info.plist */; };
 		20FF726C27C5694C00369EC2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 20FF726B27C5694C00369EC2 /* FirebaseAnalytics */; };
 		20FF726E27C5694C00369EC2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 20FF726D27C5694C00369EC2 /* FirebaseAuth */; };
+		20FF727027C56A6100369EC2 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF726F27C56A6100369EC2 /* AuthState.swift */; };
+		20FF727327C56B4500369EC2 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF727227C56B4500369EC2 /* AuthViewController.swift */; };
 		E363326027C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325427C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf */; };
 		E363326127C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325527C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf */; };
 		E363326227C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325627C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf */; };
@@ -143,6 +145,8 @@
 		20F5433727C4F2710008C996 /* DiscoverNewsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverNewsCollectionView.swift; sourceTree = "<group>"; };
 		20F5433927C4F3A20008C996 /* DiscoverNewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverNewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		20FF726827C5677A00369EC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		20FF726F27C56A6100369EC2 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		20FF727227C56B4500369EC2 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E363325427C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		E363325527C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
 		E363325627C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Medium.ttf"; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 		202CBAF227BD5F2B00DA4FCD /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				20FF727127C56B3A00369EC2 /* Auth */,
 				20FF726827C5677A00369EC2 /* GoogleService-Info.plist */,
 				20F0198327C26E5900CD0EBC /* NewsDetails */,
 				203EC8AD27C0151600FB20CE /* Realm */,
@@ -247,6 +252,7 @@
 				202CBAFC27BD5F2C00DA4FCD /* Assets.xcassets */,
 				202CBAFE27BD5F2C00DA4FCD /* LaunchScreen.storyboard */,
 				202CBB0127BD5F2C00DA4FCD /* Info.plist */,
+				20FF726F27C56A6100369EC2 /* AuthState.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -402,6 +408,14 @@
 			path = DiscoverNews;
 			sourceTree = "<group>";
 		};
+		20FF727127C56B3A00369EC2 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				20FF727227C56B4500369EC2 /* AuthViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		E363325327C2F6DB0051B849 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +540,7 @@
 				202CBB2927BD649200DA4FCD /* DateExtensions.swift in Sources */,
 				200DEB8627BEBD3F00169D33 /* NewsAPISyncer.swift in Sources */,
 				202CBB1A27BD616D00DA4FCD /* PopoverTableViewCell.swift in Sources */,
+				20FF727027C56A6100369EC2 /* AuthState.swift in Sources */,
 				E3808AD327C046B300E3667A /* NewsSourcesViewController.swift in Sources */,
 				202CBB2F27BD64F800DA4FCD /* AnimatedSideMenuController.swift in Sources */,
 				202CBB2527BD641F00DA4FCD /* UIFontExtensions.swift in Sources */,
@@ -543,6 +558,7 @@
 				202CBB3727BD65C000DA4FCD /* SideMenuItem.swift in Sources */,
 				202CBB3927BD677500DA4FCD /* PopoverMenuItem.swift in Sources */,
 				20F0198727C290A000CD0EBC /* NewsDetailsView.swift in Sources */,
+				20FF727327C56B4500369EC2 /* AuthViewController.swift in Sources */,
 				202CBB1527BD602300DA4FCD /* SearchableContentViewController.swift in Sources */,
 				202CBB3C27BD68A300DA4FCD /* DashboardViewController.swift in Sources */,
 				202CBB1027BD5FCE00DA4FCD /* SeparatorView.swift in Sources */,

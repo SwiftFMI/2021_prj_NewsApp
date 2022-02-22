@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum SideMenuItemType {
-    case dashboard, favourites, recommended, politics, technology, business, health, entertainment
+    case dashboard, favourites, recommended, politics, technology, business, health, entertainment, logOut
 }
 
 struct SideMenuItem {
@@ -24,6 +24,7 @@ struct MenuItems {
         SideMenuItem(image: SystemAssets.listDashHeaderRectangle, tintColor: .primaryStaticText, title: "Dashboard", type: .dashboard),
         SideMenuItem(image: SystemAssets.heartFill, tintColor: .primaryStaticText, title: "Favourites", type: .favourites),
         SideMenuItem(image: SystemAssets.presonFillViewfinder, tintColor: .primaryStaticText, title: "Recommended", type: .recommended),
+        SideMenuItem(image: SystemAssets.arrowUTurnLeft, tintColor: .primaryStaticText, title: "Log Out", type: .logOut)
     ]
     
     let categories = [
@@ -42,6 +43,8 @@ struct MenuItems {
             return (0, 1)
         case .recommended:
             return (0, 2)
+        case .logOut:
+            return (0, 3)
         case .politics:
             return (1, 0)
         case .technology:
