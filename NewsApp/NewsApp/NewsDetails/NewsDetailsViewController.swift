@@ -31,6 +31,8 @@ class NewsDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = article?.getSource()?.rawValue
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .primaryBackgrond
         scrollView.isScrollEnabled = true

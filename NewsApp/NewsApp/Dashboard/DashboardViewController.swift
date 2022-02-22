@@ -23,6 +23,7 @@ class DashboardViewController: UIViewController {
         
         let sideMenuButtonBarButtonItem = UIBarButtonItem(customView: sideMenuButton)
         navigationItem.rightBarButtonItem = sideMenuButtonBarButtonItem
+        navigationItem.title = "Dashboard"
         
         let newsFeedContentView = UIView()
         newsFeedContentView.translatesAutoresizingMaskIntoConstraints = false
