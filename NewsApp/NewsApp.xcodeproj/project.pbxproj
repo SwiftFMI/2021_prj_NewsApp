@@ -57,6 +57,9 @@
 		20F5433527C4F1730008C996 /* NewsFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5433427C4F1730008C996 /* NewsFeedTableViewCell.swift */; };
 		20F5433827C4F2710008C996 /* DiscoverNewsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5433727C4F2710008C996 /* DiscoverNewsCollectionView.swift */; };
 		20F5433A27C4F3A20008C996 /* DiscoverNewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5433927C4F3A20008C996 /* DiscoverNewsCollectionViewCell.swift */; };
+		20FF726927C5677A00369EC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FF726827C5677A00369EC2 /* GoogleService-Info.plist */; };
+		20FF726C27C5694C00369EC2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 20FF726B27C5694C00369EC2 /* FirebaseAnalytics */; };
+		20FF726E27C5694C00369EC2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 20FF726D27C5694C00369EC2 /* FirebaseAuth */; };
 		E363326027C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325427C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf */; };
 		E363326127C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325527C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf */; };
 		E363326227C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325627C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf */; };
@@ -139,6 +142,7 @@
 		20F5433427C4F1730008C996 /* NewsFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewCell.swift; sourceTree = "<group>"; };
 		20F5433727C4F2710008C996 /* DiscoverNewsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverNewsCollectionView.swift; sourceTree = "<group>"; };
 		20F5433927C4F3A20008C996 /* DiscoverNewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverNewsCollectionViewCell.swift; sourceTree = "<group>"; };
+		20FF726827C5677A00369EC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E363325427C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		E363325527C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
 		E363325627C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Medium.ttf"; sourceTree = "<group>"; };
@@ -161,8 +165,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				202CBB4127BD6C2500DA4FCD /* Alamofire.xcframework in Frameworks */,
+				20FF726E27C5694C00369EC2 /* FirebaseAuth in Frameworks */,
 				202CBB4B27BD6C2C00DA4FCD /* SideMenu.xcframework in Frameworks */,
 				202CBB4827BD6C2A00DA4FCD /* RealmSwift.xcframework in Frameworks */,
+				20FF726C27C5694C00369EC2 /* FirebaseAnalytics in Frameworks */,
 				202CBB4527BD6C2800DA4FCD /* Realm.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +231,7 @@
 		202CBAF227BD5F2B00DA4FCD /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				20FF726827C5677A00369EC2 /* GoogleService-Info.plist */,
 				20F0198327C26E5900CD0EBC /* NewsDetails */,
 				203EC8AD27C0151600FB20CE /* Realm */,
 				200DEB8427BEBD3200169D33 /* Syncers */,
@@ -431,6 +438,10 @@
 			dependencies = (
 			);
 			name = NewsApp;
+			packageProductDependencies = (
+				20FF726B27C5694C00369EC2 /* FirebaseAnalytics */,
+				20FF726D27C5694C00369EC2 /* FirebaseAuth */,
+			);
 			productName = NewsApp;
 			productReference = 202CBAF027BD5F2B00DA4FCD /* NewsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -459,6 +470,9 @@
 				Base,
 			);
 			mainGroup = 202CBAE727BD5F2B00DA4FCD;
+			packageReferences = (
+				20FF726A27C5694C00369EC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 202CBAF127BD5F2B00DA4FCD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -482,6 +496,7 @@
 				E363326127C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf in Resources */,
 				E363326B27C2F6DB0051B849 /* PlayfairDisplay-ExtraBold.ttf in Resources */,
 				202CBAFD27BD5F2C00DA4FCD /* Assets.xcassets in Resources */,
+				20FF726927C5677A00369EC2 /* GoogleService-Info.plist in Resources */,
 				E363326227C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf in Resources */,
 				E363326427C2F6DB0051B849 /* PlayfairDisplay-ExtraBoldItalic.ttf in Resources */,
 				E363326927C2F6DB0051B849 /* PlayfairDisplay-MediumItalic.ttf in Resources */,
@@ -758,6 +773,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		20FF726A27C5694C00369EC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		20FF726B27C5694C00369EC2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20FF726A27C5694C00369EC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		20FF726D27C5694C00369EC2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20FF726A27C5694C00369EC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 202CBAE827BD5F2B00DA4FCD /* Project object */;
 }
