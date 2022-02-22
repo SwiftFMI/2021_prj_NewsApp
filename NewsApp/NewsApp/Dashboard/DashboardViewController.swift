@@ -9,7 +9,10 @@ import Foundation
 import UIKit
 
 class DashboardViewController: UIViewController {
-        
+    
+    let discoverViewController = DiscoverNewsViewController()
+    let feedViewController = NewsFeedViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,24 +25,29 @@ class DashboardViewController: UIViewController {
         let sideMenuButtonBarButtonItem = UIBarButtonItem(customView: sideMenuButton)
         navigationItem.rightBarButtonItem = sideMenuButtonBarButtonItem
         
-        //TODO: Use constraints instead of frames
-        let discoverNewsCard = DiscoverNewsCard()
-       //discoverNewsCard.view.translatesAutoresizingMaskIntoConstraints = false
-       discoverNewsCard.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/2 - 50)
-        self.addChild(discoverNewsCard)
-        self.view.addSubview(discoverNewsCard.view)
+        let discoverNewsContentView = UIView()
+        discoverNewsContentView.translatesAutoresizingMaskIntoConstraints = false
         
-        //TODO: Use constraints instead of frames
-        let newsCard = NewsCard()
-        //newsCard.view.translatesAutoresizingMaskIntoConstraints = false
-        newsCard.view.frame = CGRect(x: 0, y: 370, width: self.view.frame.width, height: self.view.frame.height/2)
-        self.addChild(newsCard)
-        self.view.addSubview(newsCard.view)
+        let newsFeedContentView = UIView()
+        newsFeedContentView.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(discoverNewsContentView)
+        view.addSubview(newsFeedContentView)
+        
+        add(asChildViewController: discoverViewController, contentView: discoverNewsContentView)
+        add(asChildViewController: feedViewController, contentView: newsFeedContentView)
+        
+        let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-         //   discoverNewsCard.view.topAnchor.constraint(equalTo: view.topAnchor),
-            newsCard.view.topAnchor.constraint(equalTo: discoverNewsCard.view.bottomAnchor),
-            newsCard.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            discoverNewsContentView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            discoverNewsContentView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            discoverNewsContentView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            discoverNewsContentView.bottomAnchor.constraint(equalTo: safeArea.centerYAnchor, constant: -50),
+            
+            newsFeedContentView.topAnchor.constraint(equalTo: discoverNewsContentView.bottomAnchor),
+            newsFeedContentView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            newsFeedContentView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            newsFeedContentView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
         ])
     }
     

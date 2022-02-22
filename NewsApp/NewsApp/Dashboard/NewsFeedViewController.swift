@@ -1,5 +1,5 @@
 //
-//  NewsCard.swift
+//  NewsFeedViewController.swift
 //  NewsApp
 //
 //  Created by ZehraIliyaz  on 19.02.22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class NewsCard: UIViewController {
+class NewsFeedViewController: UIViewController {
 
     private let articleDataSource = NewsArticleTableViewDataSource()
     
@@ -41,7 +41,7 @@ class NewsCard: UIViewController {
     }
 }
 
-extension NewsCard: UITableViewDataSource {
+extension NewsFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleDataSource.articles?.count ?? 0
     }
@@ -59,7 +59,7 @@ extension NewsCard: UITableViewDataSource {
     }
 }
 
-extension NewsCard: UITableViewDelegate {
+extension NewsFeedViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return articleDataSource.articles?.count ?? 0
     }

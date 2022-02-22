@@ -1,5 +1,5 @@
 //
-//  DiscoverCard.swift
+//  DiscoverNewsViewController.swift
 //  NewsApp
 //
 //  Created by ZehraIliyaz  on 18.02.22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DiscoverNewsCard: UIViewController {
+class DiscoverNewsViewController: UIViewController {
     
     private var sources = NewsSourceDescriptor.parseFromJson()
     
@@ -45,7 +45,7 @@ class DiscoverNewsCard: UIViewController {
     }
 }
 
-extension DiscoverNewsCard: UICollectionViewDataSource {
+extension DiscoverNewsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -65,7 +65,7 @@ extension DiscoverNewsCard: UICollectionViewDataSource {
     }
 }
 
-extension DiscoverNewsCard: UICollectionViewDelegate {
+extension DiscoverNewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Present TableView with news from source
         //let focusedImage = ImageViewController(image: sources[indexPath.item].image)
@@ -73,7 +73,7 @@ extension DiscoverNewsCard: UICollectionViewDelegate {
     }
 }
 
-extension DiscoverNewsCard: UICollectionViewDelegateFlowLayout {
+extension DiscoverNewsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }

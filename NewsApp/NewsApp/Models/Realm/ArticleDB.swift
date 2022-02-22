@@ -8,11 +8,6 @@
 import Foundation
 import RealmSwift
 
-struct iPad: Hashable {
-    var serialNumber: String
-    var capacity: Int
-}
-
 class ArticleDB: Object {
     @objc dynamic var id: String?
     @objc dynamic var author: String?
