@@ -17,6 +17,7 @@ class NewsFeedTableView: UITableView {
         
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .primaryBackgrond
+        separatorStyle = .none
     }
     
     required init?(coder: NSCoder) {

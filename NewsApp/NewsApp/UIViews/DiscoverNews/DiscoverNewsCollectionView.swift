@@ -21,6 +21,6 @@ class DiscoverNewsCollectionView: UICollectionView {
         
         translatesAutoresizingMaskIntoConstraints = false
         showsHorizontalScrollIndicator = false
-        backgroundColor = .secondaryGray
+        backgroundColor = .primaryBackgrond
     }
 }

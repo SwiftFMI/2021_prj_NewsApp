@@ -32,7 +32,7 @@ class DiscoverNewsCollectionViewCell: UICollectionViewCell {
     
     private func setupUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .secondaryBackground
         contentView.layer.cornerRadius = 6.0
         contentView.layer.masksToBounds = true
         
