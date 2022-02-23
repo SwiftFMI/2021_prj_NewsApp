@@ -17,7 +17,6 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
         currentActiveSection = item
         
         switch currentActiveSection {
-            //TODO: add cases for navigation items tap
         case .dashboard:
             popToRootViewController(animated: true)
             
