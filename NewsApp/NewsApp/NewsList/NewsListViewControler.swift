@@ -7,19 +7,18 @@
 
 import Foundation
 import UIKit
-//import RealmSwift
 
 class NewsListViewController: UIViewController {
     
-    var articles:[ArticleDB] = []
-    var filtered:[ArticleDB] = []
+    var articles = [ArticleDB]()
+    var filtered = [ArticleDB]()
     var category: NewsCategory = NewsCategory.general
     
     private let articleDataSource = NewsArticleDataSource()
     
     var searchBar = UISearchBar()
     var newsTableView = UITableView()
-    var searchActive : Bool = false
+    var searchActive: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +27,11 @@ class NewsListViewController: UIViewController {
         articleDataSource.syncArticles(forCountry: .us)
         articleDataSource.loadArticles()
         articles = articleDataSource.getArticles(forCategory: category)?.toArray() ?? []
+        
         if articles.isEmpty {
             articles = articleDataSource.articles ?? []
         }
+        
         view.backgroundColor = .primaryBackgrond
         
         let sideMenuButton = UIButton()
@@ -57,11 +58,12 @@ class NewsListViewController: UIViewController {
         default:
             navigationItem.title = "General"
         }
+        
         searchBar.delegate = self
         view.addSubview(searchBar)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             searchBar.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
             searchBar.heightAnchor.constraint(equalToConstant: 30),
@@ -77,6 +79,7 @@ class NewsListViewController: UIViewController {
         newsTableView.rowHeight = 300
         view.addSubview(newsTableView)
         newsTableView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             newsTableView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20),
             newsTableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
@@ -93,11 +96,9 @@ class NewsListViewController: UIViewController {
         guard let sideMenuController = sideMenuController else { return }
         sideMenuController.isMenuRevealed ? sideMenuController.hideMenu() : sideMenuController.revealMenu()
     }
-    
 }
 
 extension NewsListViewController : UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchActive ? filtered.count : articles.count
     }
@@ -115,8 +116,6 @@ extension NewsListViewController : UITableViewDataSource {
         }
         return cell
     }
-    
-   
 }
 
 extension NewsListViewController :UITableViewDelegate{
@@ -125,7 +124,7 @@ extension NewsListViewController :UITableViewDelegate{
         
         if searchActive && filtered.count > indexPath.row {
             articleOpt = filtered[indexPath.row]
-        }else if !searchActive && articles.count > indexPath.row {
+        } else if !searchActive && articles.count > indexPath.row {
             articleOpt = articles[indexPath.row]
         }
         
@@ -139,26 +138,24 @@ extension NewsListViewController :UITableViewDelegate{
                 tableView.cellForRow(at: indexPath)?.isSelected = false
             }
         })
-        
     }
 }
-
 
 extension NewsListViewController :UISearchBarDelegate{
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
     }
-
+    
     //func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
     //    searchActive = false;
     //}
-
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         self.view.endEditing(true)
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchActive = true;
         filtered = articles.filter({ (article) -> Bool in
@@ -166,9 +163,11 @@ extension NewsListViewController :UISearchBarDelegate{
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             return range.location != NSNotFound
         })
+        
         if searchText.isEmpty {
             searchActive = false;
         }
+        
         self.newsTableView.reloadData()
     }
 }

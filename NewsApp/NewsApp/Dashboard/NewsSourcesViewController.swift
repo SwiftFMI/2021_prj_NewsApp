@@ -51,8 +51,8 @@ extension NewsSourcesViewController: UICollectionViewDataSource {
 
 extension NewsSourcesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: Present TableView with news from source
-        NSLog("sourceView")
+        let newsSourceController = NewsListViewController()
+        navigationController?.pushViewController(newsSourceController, animated: true)
     }
 }
 
