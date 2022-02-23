@@ -18,7 +18,9 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
         
         switch currentActiveSection {
             //TODO: add cases for navigation items tap
-                        
+        case .logOut:
+            AuthState.current.logOut(authControllerPresenter: self)
+          
         case SideMenuItemType.science :
             let newsList = NewsListViewController()
             newsList.category = NewsCategory.science
@@ -48,7 +50,7 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
             let newsList = NewsListViewController()
             newsList.category = NewsCategory.entertainment
             self.pushViewController(newsList, animated: true)
-            
+          
         default:
             break
         }

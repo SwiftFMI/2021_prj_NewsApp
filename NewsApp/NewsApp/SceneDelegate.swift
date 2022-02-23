@@ -40,6 +40,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {}
     func sceneDidEnterBackground(_ scene: UIScene) {}
 
-    func showSignIn() {}
+    private func showSignIn() {
+        if AuthState.current.userLoginStatus {
+            return
+        }
+        
+        let authController = AuthViewController()
+        authController.modalPresentationStyle = .fullScreen
+        
+        if let presentedController = window?.rootViewController?.presentedViewController {
+            if type(of: presentedController) != AuthViewController.self {
+                presentedController.present(authController, animated: false, completion: nil)
+                return
+            }
+        }
+        
+        window?.rootViewController?.present(authController, animated: false, completion: nil)
+    }
 }
 
