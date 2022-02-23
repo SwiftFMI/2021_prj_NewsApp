@@ -10,6 +10,7 @@ import Alamofire
 import UIKit
 
 fileprivate let baseUrl = "https://newsapi.org/v2/"
+fileprivate let backupUrl = "https://saurav.tech/NewsAPI/" // https://github.com/SauravKanchan/NewsAPI
 fileprivate let topHeadlinesPath = "top-headlines"
 fileprivate let everythingPath = "everything"
 
