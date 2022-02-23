@@ -25,7 +25,7 @@ class DashboardViewController: UIViewController {
         
         articleDataSource.delegate = self
         articleDataSource.syncArticles(forCountry: .us)
-        articleDataSource.loadArticles()
+        articleDataSource.loadAllArticles()
     }
     
     required init?(coder: NSCoder) {

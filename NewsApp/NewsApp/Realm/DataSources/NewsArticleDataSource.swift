@@ -24,18 +24,53 @@ class NewsArticleDataSource {
     
     init(withMessageDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
         self.delegate = delegate
-        loadOnInit ? loadArticles() : nil
+        loadOnInit ? loadAllArticles() : nil
+    }
+    
+    init(withArticleCategory category: NewsCategory, withMessageDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
+        self.delegate = delegate
+        loadOnInit ? loadArticles(forCategory: category) : nil
+    }
+    
+    init(withArticleSource source: NewsSource, withMessageDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
+        self.delegate = delegate
+        loadOnInit ? loadArticles(forSource: source) : nil
     }
     
     deinit {
         token = nil
     }
     
-    func loadArticles() {
+    func loadAllArticles() {
         token = nil
         
-        // currently it loads all articles saved locally
         articlesDb = getArticles()
+        articles = articlesDb?.toArray()
+        
+        delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
+        
+        if let articles = articlesDb {
+            token = setObserver(forArticles: articles)
+        }
+    }
+    
+    func loadArticles(forSource source: NewsSource) {
+        token = nil
+        
+        articlesDb = getArticles(forSource: source)
+        articles = articlesDb?.toArray()
+        
+        delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
+        
+        if let articles = articlesDb {
+            token = setObserver(forArticles: articles)
+        }
+    }
+    
+    func loadArticles(forCategory category: NewsCategory) {
+        token = nil
+        
+        articlesDb = getArticles(forCategory: category)
         articles = articlesDb?.toArray()
         
         delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
@@ -76,6 +111,10 @@ extension NewsArticleDataSource {
     func getArticles(forCategory category: NewsCategory, sortOptions: [RealmSwift.SortDescriptor]? = nil) -> Results<ArticleDB>? {
         getArticles(forPredicate: NSPredicate(format: "category == %@", category.rawValue), sortOptions: sortOptions)
     }
+    
+    func getArticles(forSource source: NewsSource, sortOptions: [RealmSwift.SortDescriptor]? = nil) -> Results<ArticleDB>? {
+        getArticles(forPredicate: NSPredicate(format: "source == %@", source.rawValue), sortOptions: sortOptions)
+    }
 }
 
 // MARK: Methods to save articles to local data
@@ -107,6 +146,24 @@ extension NewsArticleDataSource {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
         NewsAPISyncer().getTopHeadlines(country: country, completion: { [weak self] articles in
+            self?.saveArticles(articles)
+            completion?()
+        })
+    }
+    
+    func syncArticles(forCategory category: NewsCategory, completion: (() -> Void?)? = nil) {
+        delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
+        
+        NewsAPISyncer().getTopHeadlines(forCategory: category, completion: { [weak self] articles in
+            self?.saveArticles(articles)
+            completion?()
+        })
+    }
+    
+    func syncArticles(fromSource source: NewsSource, completion: (() -> Void?)? = nil) {
+        delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
+        
+        NewsAPISyncer().getTopHeadlines(forSource: source, completion: { [weak self] articles in
             self?.saveArticles(articles)
             completion?()
         })

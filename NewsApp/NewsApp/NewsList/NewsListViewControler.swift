@@ -25,7 +25,7 @@ class NewsListViewController: UIViewController {
         
         articleDataSource.delegate = self
         articleDataSource.syncArticles(forCountry: .us)
-        articleDataSource.loadArticles()
+        articleDataSource.loadAllArticles()
         articles = articleDataSource.getArticles(forCategory: category)?.toArray() ?? []
         
         if articles.isEmpty {
