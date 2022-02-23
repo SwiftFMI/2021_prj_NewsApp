@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum SideMenuItemType {
-    case dashboard, favourites, recommended, politics, technology, business, health, entertainment, logOut
+    case dashboard, favourites, recommended, science, technology, business, health, entertainment, sports, logOut
 }
 
 struct SideMenuItem {
@@ -28,11 +28,12 @@ struct MenuItems {
     ]
     
     let categories = [
-        SideMenuItem(image: SystemAssets.personTwoCircle, tintColor: .primaryStaticText, title: "Politics", type: .politics),
+        SideMenuItem(image: SystemAssets.testtube2, tintColor: .primaryStaticText, title: "Science", type: .science),
         SideMenuItem(image: SystemAssets.externalDrive, tintColor: .primaryStaticText, title: "Technology", type: .technology),
         SideMenuItem(image: SystemAssets.dollarSignFill, tintColor: .primaryStaticText, title: "Business", type: .business),
         SideMenuItem(image: SystemAssets.leafCircleFill, tintColor: .primaryStaticText, title: "Health", type: .health),
-        SideMenuItem(image: SystemAssets.tvInsetFilled, tintColor: .primaryStaticText, title: "Entertainment", type: .entertainment)
+        SideMenuItem(image: SystemAssets.tvInsetFilled, tintColor: .primaryStaticText, title: "Entertainment", type: .entertainment),
+        SideMenuItem(image: SystemAssets.sportscourt, tintColor: .primaryStaticText, title: "Sports", type: .sports)
     ]
     
     func getIndex(type: SideMenuItemType) -> (section: Int, row: Int) {
@@ -45,16 +46,18 @@ struct MenuItems {
             return (0, 2)
         case .logOut:
             return (0, 3)
-        case .politics:
-            return (1, 0)
-        case .technology:
-            return (1, 1)
         case .business:
+            return (1, 0)
+        case .science:
+            return (1, 1)
+        case .technology:
             return (1, 2)
         case .health:
             return (1, 3)
         case .entertainment:
             return (1, 4)
+        case .sports:
+            return (1, 5)
         }
         
     }

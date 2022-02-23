@@ -20,6 +20,37 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
             //TODO: add cases for navigation items tap
         case .logOut:
             AuthState.current.logOut(authControllerPresenter: self)
+          
+        case SideMenuItemType.science :
+            let newsList = NewsListViewController()
+            newsList.category = NewsCategory.science
+            self.pushViewController(newsList, animated: true)
+
+        case SideMenuItemType.technology :
+            let newsList = NewsListViewController()
+            newsList.category = NewsCategory.technology
+            self.pushViewController(newsList, animated: true)
+            
+        case SideMenuItemType.business :
+            let newsList = NewsListViewController()
+            newsList.category = NewsCategory.business
+            self.pushViewController(newsList, animated: true)
+            
+        case SideMenuItemType.health :
+            let newsList = NewsListViewController()
+            newsList.category = NewsCategory.health
+            self.pushViewController(newsList, animated: true)
+            
+        case SideMenuItemType.entertainment :
+            let newsList = NewsListViewController()
+            newsList.category = NewsCategory.entertainment
+            self.pushViewController(newsList, animated: true)
+            
+        case SideMenuItemType.sports :
+            let newsList = NewsListViewController()
+            newsList.category = NewsCategory.entertainment
+            self.pushViewController(newsList, animated: true)
+          
         default:
             break
         }

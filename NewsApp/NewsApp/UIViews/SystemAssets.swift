@@ -33,4 +33,6 @@ class SystemAssets {
     static let tvInsetFilled = UIImage(systemName: "tv.inset.filled")
     static let arrowUpCircleFill = UIImage(systemName: "arrow.up.circle.fill")
     static let arrowUTurnLeft = UIImage(systemName: "arrow.uturn.left")
+    static let testtube2 = UIImage(systemName: "testtube.2")
+    static let sportscourt = UIImage(systemName: "sportscourt")
 }
