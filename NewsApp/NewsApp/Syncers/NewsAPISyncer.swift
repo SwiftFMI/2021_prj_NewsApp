@@ -13,7 +13,9 @@ fileprivate let baseUrl = "https://newsapi.org/v2/"
 fileprivate let topHeadlinesPath = "top-headlines"
 fileprivate let everythingPath = "everything"
 
-fileprivate let apiKey = "41c44882480a4ba78343301163d2c0bd"
+fileprivate let apiKeys: [String]  = [
+    "41c44882480a4ba78343301163d2c0bd"
+]
 
 class NewsAPISyncer: NSObject {
     
@@ -22,7 +24,7 @@ class NewsAPISyncer: NSObject {
             completion(nil)
             return
         }
-
+        
         AF.request(url, method: .get, encoding: URLEncoding.default).response { response in
             guard let data = response.data, response.error == nil else {
                 completion(nil)
@@ -41,7 +43,7 @@ class NewsAPISyncer: NSObject {
     func getTopHeadlines(forSource source: NewsSource, query: String? = nil, page: Int = 1, completion: @escaping ([Article]?) -> Void) {
         getTopHeadlines(forSource: source, query: query, page: page, completion: completion)
     }
-   
+    
     /// Atleast one parameter should have a value.
     func getAllArticles(forSource source: NewsSource? = nil,
                         query: String? = nil,
@@ -50,7 +52,7 @@ class NewsAPISyncer: NSObject {
                         page: Int = 1,
                         completion: @escaping ([Article]?) -> Void) {
         
-        var params: Parameters = [ "apiKey" : apiKey, "page" : page ]
+        var params: Parameters = [ "apiKey" : apiKeys.randomElement()!, "page" : page ]
         
         if let source = source {
             params["sources"] = source.rawValue
@@ -92,7 +94,7 @@ class NewsAPISyncer: NSObject {
                                  page: Int = 1,
                                  completion: @escaping ([Article]?) -> Void) {
         
-        var params: Parameters = [ "apiKey" : apiKey, "page" : page ]
+        var params: Parameters = [ "apiKey" : apiKeys.randomElement()!, "page" : page ]
         
         if let category = category {
             params["category"] = category.rawValue
