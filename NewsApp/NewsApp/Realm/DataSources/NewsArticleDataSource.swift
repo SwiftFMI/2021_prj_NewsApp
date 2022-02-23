@@ -20,6 +20,8 @@ class NewsArticleDataSource {
     
     private(set) var articles: [ArticleDB]?
     
+    var currentPage: Int = 0
+    
     weak var delegate: NewsArticleDataSourceDelegate?
     
     init(withMessageDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
@@ -164,8 +166,9 @@ extension NewsArticleDataSource {
     func syncArticles(forCountry country: NewsCountry, completion: (() -> Void?)? = nil) {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
-        NewsAPISyncer().getTopHeadlines(country: country, completion: { [weak self] articles in
+        NewsAPISyncer().getTopHeadlines(country: country, page: currentPage + 1, completion: { [weak self] articles in
             self?.saveArticles(articles)
+            self?.currentPage += 1
             completion?()
         })
     }
@@ -173,8 +176,9 @@ extension NewsArticleDataSource {
     func syncArticles(forCategory category: NewsCategory, completion: (() -> Void?)? = nil) {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
-        NewsAPISyncer().getTopHeadlines(forCategory: category, completion: { [weak self] articles in
+        NewsAPISyncer().getTopHeadlines(forCategory: category, page: currentPage + 1, completion: { [weak self] articles in
             self?.saveArticles(articles, fromCategory: category)
+            self?.currentPage += 1
             completion?()
         })
     }
@@ -182,8 +186,9 @@ extension NewsArticleDataSource {
     func syncArticles(fromSource source: NewsSource, completion: (() -> Void?)? = nil) {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
-        NewsAPISyncer().getTopHeadlines(forSource: source, completion: { [weak self] articles in
+        NewsAPISyncer().getTopHeadlines(forSource: source, page: currentPage + 1, completion: { [weak self] articles in
             self?.saveArticles(articles, fromSource: source)
+            self?.currentPage += 1
             completion?()
         })
     }
