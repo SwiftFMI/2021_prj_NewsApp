@@ -111,9 +111,10 @@ extension NewsListViewController : UITableViewDataSource {
         
         if searchActive && filtered.count > indexPath.row {
             cell.setupCell(article: filtered[indexPath.row])
-        }else if !searchActive && articles.count > indexPath.row {
+        } else if !searchActive && articles.count > indexPath.row {
             cell.setupCell(article: articles[indexPath.row])
         }
+        
         return cell
     }
 }
