@@ -17,11 +17,15 @@ class NewsListViewController: UIViewController {
     private var searchActive: Bool = false
     private var navigationItemTitle: String?
     
+    // super cheezy shit going on around this
+    private var syncArticles: (() -> Void?)?
+    
     init(forCategory category: NewsCategory) {
         super.init(nibName: nil, bundle: nil)
         
         articleDataSource = NewsArticleDataSource(withArticleCategory: category, withMessageDataSourceDelegate: self, loadOnInit: true)
-        articleDataSource?.syncArticles(forCategory: category)
+        
+        syncArticles = { [weak self] in self?.articleDataSource?.syncArticles(forCategory: category) }
         
         navigationItemTitle = category.rawValue.capitalizeFirst()
     }
@@ -30,7 +34,8 @@ class NewsListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         articleDataSource = NewsArticleDataSource(withArticleSource: sourceDisplay.source, withMessageDataSourceDelegate: self, loadOnInit: true)
-        articleDataSource?.syncArticles(fromSource: sourceDisplay.source)
+        
+        syncArticles = { [weak self] in self?.articleDataSource?.syncArticles(fromSource: sourceDisplay.source) }
         
         navigationItemTitle = sourceDisplay.displayName
     }
@@ -50,6 +55,8 @@ class NewsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        syncArticles?()
         
         view.backgroundColor = .primaryBackgrond
         
@@ -80,6 +87,7 @@ class NewsListViewController: UIViewController {
         
         newsTableView.backgroundColor = .secondaryBackground
         newsTableView.rowHeight = 300
+        newsTableView.showsVerticalScrollIndicator = false
         view.addSubview(newsTableView)
         newsTableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -144,6 +152,12 @@ extension NewsListViewController :UITableViewDelegate{
                 tableView.cellForRow(at: indexPath)?.isSelected = false
             }
         })
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: 0) - 5 {
+            syncArticles?()
+        }
     }
 }
 

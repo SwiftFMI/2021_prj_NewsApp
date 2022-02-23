@@ -119,6 +119,12 @@ extension DashboardViewController: UITableViewDelegate {
         
         return contentView
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+            articleDataSource.syncArticles(forCountry: .us)
+        }
+    }
 }
 
 extension DashboardViewController: NewsArticleDataSourceDelegate {
