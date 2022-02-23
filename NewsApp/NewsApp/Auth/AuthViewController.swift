@@ -231,7 +231,7 @@ class AuthViewController: UIViewController {
             self?.toggleSpinner(on: false)
             
             guard let user = authResult?.user, error == nil else {
-                NSLog("\(error!)")
+                NSLog("\(error)")
                 return
             }
             

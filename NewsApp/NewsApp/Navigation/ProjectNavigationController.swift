@@ -22,33 +22,27 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
             AuthState.current.logOut(authControllerPresenter: self)
           
         case SideMenuItemType.science :
-            let newsList = NewsListViewController()
-            newsList.category = NewsCategory.science
+            let newsList = NewsListViewController(forCategory: .science)
             self.pushViewController(newsList, animated: true)
 
         case SideMenuItemType.technology :
-            let newsList = NewsListViewController()
-            newsList.category = NewsCategory.technology
+            let newsList = NewsListViewController(forCategory: .technology)
             self.pushViewController(newsList, animated: true)
             
         case SideMenuItemType.business :
-            let newsList = NewsListViewController()
-            newsList.category = NewsCategory.business
+            let newsList = NewsListViewController(forCategory: .business)
             self.pushViewController(newsList, animated: true)
             
         case SideMenuItemType.health :
-            let newsList = NewsListViewController()
-            newsList.category = NewsCategory.health
+            let newsList = NewsListViewController(forCategory: .health)
             self.pushViewController(newsList, animated: true)
             
         case SideMenuItemType.entertainment :
-            let newsList = NewsListViewController()
-            newsList.category = NewsCategory.entertainment
+            let newsList = NewsListViewController(forCategory: .entertainment)
             self.pushViewController(newsList, animated: true)
             
         case SideMenuItemType.sports :
-            let newsList = NewsListViewController()
-            newsList.category = NewsCategory.entertainment
+            let newsList = NewsListViewController(forCategory: .sports)
             self.pushViewController(newsList, animated: true)
           
         default:

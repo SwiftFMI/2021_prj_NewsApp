@@ -7,70 +7,24 @@
 
 import Foundation
 
-struct Source: Decodable {
-    var image: String
-    var name: String
+struct NewsSourceDisplay {
+    let source: NewsSource
+    let displayName: String
 }
 
-struct NewsSourceDescriptor {
-    
-   static func parseFromJson() -> [Source] {
-        let JSON = """
-        [
-          {
-            "image": "bloomberg.png",
-            "name": "Bloomberg"
-          },
-          {
-            "image": "daily-mail.png",
-            "name": "Daily Mail"
-          },
-          {
-            "image": "fox-sports.png",
-            "name": "Fox Sports"
-          },
-          {
-            "image": "google-news.jpeg",
-            "name": "Google News"
-          },
-          {
-            "image": "the-guardian.png",
-            "name": "The Guardian"
-          },
-          {
-            "image": "metro.jpeg",
-            "name": "Metro"
-          },
-          {
-            "image": "national-geographic.jpeg",
-            "name": "NatGeo"
-          },
-          {
-            "image": "reddit.jpeg",
-            "name": "Reddit"
-          },
-          {
-            "image": "the-economist.png",
-            "name": "The Economist"
-          },
-          {
-            "image": "bbc-news.png",
-            "name": "BBC News"
-          },
-          {
-            "image": "abc-news.png",
-            "name": "ABC News"
-          },
-          {
-            "image": "tech-crunch.jpg",
-            "name": "Tech Crunch"
-          }
-        ]
-
-        """
-        
-        let jsonData = JSON.data(using: .utf8)!
-        let sources: [Source] = try! JSONDecoder().decode([Source].self, from: jsonData)
-        return sources
-    }
+struct RecommendedNewsSources {
+    let sources = [
+        NewsSourceDisplay(source: .Bloomberg, displayName: "Bloomberg"),
+        NewsSourceDisplay(source: .DailyMail, displayName: "Daily Mail"),
+        NewsSourceDisplay(source: .FoxSports, displayName: "Fox Sports"),
+        NewsSourceDisplay(source: .Google, displayName: "Google News"),
+        NewsSourceDisplay(source: .TheGuardianUK, displayName: "The Guardian UK"),
+        NewsSourceDisplay(source: .Metro, displayName: "Metro"),
+        NewsSourceDisplay(source: .NatGeo, displayName: "National Geographics"),
+        NewsSourceDisplay(source: .Reddit, displayName: "Reddit"),
+        NewsSourceDisplay(source: .TheEconomist, displayName: "The Economist"),
+        NewsSourceDisplay(source: .BBC, displayName: "BBC News"),
+        NewsSourceDisplay(source: .AustralianBroadcastCorporation, displayName: "ABC News"),
+        NewsSourceDisplay(source: .TechCrunch, displayName: "Tech Crunch"),
+    ]
 }

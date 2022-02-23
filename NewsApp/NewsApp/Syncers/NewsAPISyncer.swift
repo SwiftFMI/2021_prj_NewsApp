@@ -47,7 +47,7 @@ class NewsAPISyncer: NSObject {
     }
     
     func getTopHeadlines(forSource source: NewsSource, query: String? = nil, page: Int = 1, completion: @escaping ([Article]?) -> Void) {
-        getTopHeadlines(forSource: source, query: query, page: page, completion: completion)
+        getTopHeadlines(forCategory: nil, source: source, query: query, page: page, completion: completion)
     }
     
     /// Atleast one parameter should have a value.

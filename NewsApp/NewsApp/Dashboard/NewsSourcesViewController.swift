@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class NewsSourcesViewController: UIViewController {
-    private let sources = NewsSourceDescriptor.parseFromJson()
+    private let sources = RecommendedNewsSources().sources
     private let discoverCollectionView = DiscoverNewsCollectionView(frame: .zero)
     
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ extension NewsSourcesViewController: UICollectionViewDataSource {
 
 extension NewsSourcesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let newsSourceController = NewsListViewController()
+        let newsSourceController = NewsListViewController(forSource: sources[indexPath.row])
         navigationController?.pushViewController(newsSourceController, animated: true)
     }
 }

@@ -15,4 +15,9 @@ extension String {
             self = regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replaceWith)
         } catch { return }
     }
+    
+    func capitalizeFirst() -> String {
+        let firstIndex = self.index(startIndex, offsetBy: 1)
+        return self.substring(to: firstIndex).capitalized + self.substring(from: firstIndex).lowercased()
+    }
 }

@@ -119,7 +119,7 @@ extension NewsArticleDataSource {
 
 // MARK: Methods to save articles to local data
 extension NewsArticleDataSource {
-    func saveArticles(_ articles: [Article]?) {
+    func saveArticles(_ articles: [Article]?, fromCategory category: NewsCategory? = nil, fromSource source: NewsSource? = nil) {
         guard let realm = try? Realm() else {
             return
         }
@@ -132,7 +132,9 @@ extension NewsArticleDataSource {
                                     url: article.url,
                                     urlToImage: article.urlToImage,
                                     publishedAt: article.publishedAt,
-                                    content: article.content),
+                                    content: article.content,
+                                    category: category,
+                                    source: source),
                           update: .modified
                 )
             }
@@ -155,7 +157,7 @@ extension NewsArticleDataSource {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
         NewsAPISyncer().getTopHeadlines(forCategory: category, completion: { [weak self] articles in
-            self?.saveArticles(articles)
+            self?.saveArticles(articles, fromCategory: category)
             completion?()
         })
     }
@@ -164,7 +166,7 @@ extension NewsArticleDataSource {
         delegate?.newsArticleDataSourceDeletage(willUpdateArticles: self)
         
         NewsAPISyncer().getTopHeadlines(forSource: source, completion: { [weak self] articles in
-            self?.saveArticles(articles)
+            self?.saveArticles(articles, fromSource: source)
             completion?()
         })
     }

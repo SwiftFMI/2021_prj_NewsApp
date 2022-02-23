@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum NewsCategory: String {
     case business = "business"
@@ -141,5 +142,9 @@ enum NewsSource: String {
     case Time = "timet"
     case USA = "usa-today"
     case Wired = "wired-de"
+    
+    func getImageFromAssets() -> UIImage? {
+        return UIImage(named: self.rawValue + ".png")
+    }
 
 }

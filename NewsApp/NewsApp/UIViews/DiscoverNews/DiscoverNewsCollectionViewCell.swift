@@ -25,9 +25,9 @@ class DiscoverNewsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(sourceData: Source) {
-        logo.image = UIImage(imageLiteralResourceName: sourceData.image)
-        name.text = sourceData.name
+    func setupCell(sourceData: NewsSourceDisplay) {
+        name.text = sourceData.displayName
+        logo.image = sourceData.source.getImageFromAssets()
     }
     
     private func setupUI() {

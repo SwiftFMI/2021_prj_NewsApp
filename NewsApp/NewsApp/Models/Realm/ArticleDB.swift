@@ -27,7 +27,7 @@ class ArticleDB: Object {
         return "id"
     }
     
-    convenience init(author: String? = nil, title: String? = nil, articleDescription: String? = nil, url: String? = nil, urlToImage: String? = nil, publishedAt: String? = nil, content: String? = nil, category: NewsCategory? = nil) {
+    convenience init(author: String? = nil, title: String? = nil, articleDescription: String? = nil, url: String? = nil, urlToImage: String? = nil, publishedAt: String? = nil, content: String? = nil, category: NewsCategory? = nil, source: NewsSource? = nil) {
         self.init()
         
         self.author = author
@@ -40,14 +40,17 @@ class ArticleDB: Object {
         self.category = category?.rawValue
         
         self.id = "\(title) - \(publishedAt)"
+        
+        self.setCategory(category)
+        self.setSource(source)
     }
     
-    func setCategory(_ category: NewsCategory) {
-        self.category = category.rawValue
+    func setCategory(_ category: NewsCategory?) {
+        self.category = category?.rawValue
     }
     
-    func setSource(_ source: NewsSource) {
-        self.source = source.rawValue
+    func setSource(_ source: NewsSource?) {
+        self.source = source?.rawValue
     }
     
     func getCategory() -> NewsCategory? {

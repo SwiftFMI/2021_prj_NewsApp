@@ -9,28 +9,38 @@ import Foundation
 import UIKit
 
 class NewsListViewController: UIViewController {
+    private var articleDataSource: NewsArticleDataSource?
+    private var filtered = [ArticleDB]()
     
-    var articles = [ArticleDB]()
-    var filtered = [ArticleDB]()
-    var category: NewsCategory = NewsCategory.general
+    private var searchBar = UISearchBar()
+    private var newsTableView = UITableView()
+    private var searchActive: Bool = false
+    private var navigationItemTitle: String?
     
-    private let articleDataSource = NewsArticleDataSource()
+    init(forCategory category: NewsCategory) {
+        super.init(nibName: nil, bundle: nil)
+        
+        articleDataSource = NewsArticleDataSource(withArticleCategory: category, withMessageDataSourceDelegate: self, loadOnInit: true)
+        articleDataSource?.syncArticles(forCategory: category)
+        
+        navigationItemTitle = category.rawValue.capitalizeFirst()
+    }
     
-    var searchBar = UISearchBar()
-    var newsTableView = UITableView()
-    var searchActive: Bool = false
+    init(forSource sourceDisplay: NewsSourceDisplay) {
+        super.init(nibName: nil, bundle: nil)
+        
+        articleDataSource = NewsArticleDataSource(withArticleSource: sourceDisplay.source, withMessageDataSourceDelegate: self, loadOnInit: true)
+        articleDataSource?.syncArticles(fromSource: sourceDisplay.source)
+        
+        navigationItemTitle = sourceDisplay.displayName
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        articleDataSource.delegate = self
-        articleDataSource.syncArticles(forCountry: .us)
-        articleDataSource.loadAllArticles()
-        articles = articleDataSource.getArticles(forCategory: category)?.toArray() ?? []
-        
-        if articles.isEmpty {
-            articles = articleDataSource.articles ?? []
-        }
         
         view.backgroundColor = .primaryBackgrond
         
@@ -41,23 +51,7 @@ class NewsListViewController: UIViewController {
         let sideMenuButtonBarButtonItem = UIBarButtonItem(customView: sideMenuButton)
         navigationItem.rightBarButtonItem = sideMenuButtonBarButtonItem
         
-        switch category {
-        case NewsCategory.sports:
-            navigationItem.title = "Sports"
-        case NewsCategory.entertainment:
-            navigationItem.title = "Entertainment"
-        case NewsCategory.health:
-            navigationItem.title = "Health"
-        case NewsCategory.business:
-            navigationItem.title = "Business"
-        case NewsCategory.science:
-            navigationItem.title = "Science"
-        case NewsCategory.technology:
-            navigationItem.title = "Tehnology"
-            
-        default:
-            navigationItem.title = "General"
-        }
+        navigationItem.title = navigationItemTitle
         
         searchBar.delegate = self
         view.addSubview(searchBar)
@@ -90,6 +84,8 @@ class NewsListViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
+        
+        newsTableView.reloadData()
     }
     
     @objc private func showRightSideBar() {
@@ -100,7 +96,7 @@ class NewsListViewController: UIViewController {
 
 extension NewsListViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchActive ? filtered.count : articles.count
+        return searchActive ? filtered.count : (articleDataSource?.articles?.count ?? 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,8 +107,8 @@ extension NewsListViewController : UITableViewDataSource {
         
         if searchActive && filtered.count > indexPath.row {
             cell.setupCell(article: filtered[indexPath.row])
-        } else if !searchActive && articles.count > indexPath.row {
-            cell.setupCell(article: articles[indexPath.row])
+        } else if !searchActive && (articleDataSource?.articles?.count ?? 0) > indexPath.row {
+            cell.setupCell(article: articleDataSource?.articles?[indexPath.row])
         }
         
         return cell
@@ -125,8 +121,8 @@ extension NewsListViewController :UITableViewDelegate{
         
         if searchActive && filtered.count > indexPath.row {
             articleOpt = filtered[indexPath.row]
-        } else if !searchActive && articles.count > indexPath.row {
-            articleOpt = articles[indexPath.row]
+        } else if !searchActive && (articleDataSource?.articles?.count ?? 0) > indexPath.row {
+            articleOpt = articleDataSource?.articles?[indexPath.row]
         }
         
         guard let article = articleOpt else { return }
@@ -159,11 +155,11 @@ extension NewsListViewController :UISearchBarDelegate{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchActive = true;
-        filtered = articles.filter({ (article) -> Bool in
+        filtered = articleDataSource?.articles?.filter({ (article) -> Bool in
             let tmp : NSString = (article.title ?? "")as NSString
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             return range.location != NSNotFound
-        })
+        }) ?? []
         
         if searchText.isEmpty {
             searchActive = false;
