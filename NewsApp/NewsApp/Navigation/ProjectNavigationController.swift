@@ -18,17 +18,20 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
         
         switch currentActiveSection {
             //TODO: add cases for navigation items tap
+        case .dashboard:
+            popToRootViewController(animated: true)
+            
         case .favourites:
             let newsList = NewsListViewController(showOnlyFavourites: true)
             self.pushViewController(newsList, animated: true)
             
         case .logOut:
             AuthState.current.logOut(authControllerPresenter: self)
-          
+            
         case SideMenuItemType.science :
             let newsList = NewsListViewController(forCategory: .science)
             self.pushViewController(newsList, animated: true)
-
+            
         case SideMenuItemType.technology :
             let newsList = NewsListViewController(forCategory: .technology)
             self.pushViewController(newsList, animated: true)
@@ -48,7 +51,7 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
         case SideMenuItemType.sports :
             let newsList = NewsListViewController(forCategory: .sports)
             self.pushViewController(newsList, animated: true)
-          
+            
         default:
             break
         }
