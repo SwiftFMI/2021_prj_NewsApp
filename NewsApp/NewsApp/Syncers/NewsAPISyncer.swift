@@ -21,6 +21,7 @@ fileprivate let apiKeys = [
     "9f8e6c14f42241228bc39894bd17e895",
     "aad793f3729f4529a98b566379c6376b",
     "8109c6594e214bc9bdd2f4070aebf969",
+    "810ef752800b4b178a604b7780eae69c",
 ]
 
 class NewsAPISyncer: NSObject {
