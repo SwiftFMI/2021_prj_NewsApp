@@ -110,12 +110,12 @@ class AuthViewController: UIViewController {
             buttonsContainer.heightAnchor.constraint(equalToConstant: 50),
             
             toggleViewModeButton.topAnchor.constraint(equalTo: buttonsContainer.topAnchor),
-            toggleViewModeButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor, constant: -view.frame.width / 4),
+            toggleViewModeButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
             toggleViewModeButton.widthAnchor.constraint(equalToConstant: 50),
             toggleViewModeButton.heightAnchor.constraint(equalToConstant: 50),
             
             signInButton.topAnchor.constraint(equalTo: buttonsContainer.topAnchor),
-            signInButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor, constant: view.frame.width / 4),
+            signInButton.trailingAnchor.constraint(equalTo: buttonsContainer.trailingAnchor),
             signInButton.widthAnchor.constraint(equalToConstant: 50),
             signInButton.heightAnchor.constraint(equalToConstant: 50),
             
