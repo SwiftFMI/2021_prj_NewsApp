@@ -35,6 +35,15 @@ class NewsListViewController: UIViewController {
         navigationItemTitle = sourceDisplay.displayName
     }
     
+    init(showOnlyFavourites onlyFavourites: Bool) {
+        super.init(nibName: nil, bundle: nil)
+        
+        articleDataSource = NewsArticleDataSource(withMessageDataSourceDelegate: self, loadOnInit: false)
+        articleDataSource?.loadFavouriteArticles()
+        
+        navigationItemTitle = "Favourites"
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

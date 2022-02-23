@@ -18,6 +18,10 @@ extension ProjectNavigationController: SideMenuViewControllerDelegate {
         
         switch currentActiveSection {
             //TODO: add cases for navigation items tap
+        case .favourites:
+            let newsList = NewsListViewController(showOnlyFavourites: true)
+            self.pushViewController(newsList, animated: true)
+            
         case .logOut:
             AuthState.current.logOut(authControllerPresenter: self)
           

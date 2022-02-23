@@ -13,10 +13,12 @@ class NewsDetailsViewController: UIViewController {
     private let article: ArticleDB?
     
     private let scrollView = UIScrollView()
-    private let detailsView = NewsDetailsView()
+    private let detailsView: NewsDetailsView
     
     init(withArticle article: ArticleDB?, posterImage: UIImage?) {
         self.article = article
+        
+        detailsView = NewsDetailsView(isArticleFavourite: article?.favourite)
         
         super.init(nibName: nil, bundle: nil)
         
@@ -85,9 +87,16 @@ extension NewsDetailsViewController: NewsDetailsViewDelegate {
     }
     
     func newsDetailsViewDelegate(didTapSaveButton newsDetailsView: NewsDetailsView) {
-        guard let realm = try? Realm() else { return }
+        guard let realm = try? Realm(),
+              let article = article
+        else { return }
+        
+        article.favourite.toggle()
+        newsDetailsView.toggleFavouriteButtonStyle()
+        
         realm.safeWrite {
-            article?.favourite.toggle()
+            realm.add(article, update: .modified)
+            // Shite, should not need to add the object after modification, but it is how it is
         }
     }
 }

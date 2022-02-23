@@ -54,6 +54,19 @@ class NewsArticleDataSource {
         }
     }
     
+    func loadFavouriteArticles() {
+        token = nil
+        
+        articlesDb = getFavouriteArticles()
+        articles = articlesDb?.toArray()
+        
+        delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
+        
+        if let articles = articlesDb {
+            token = setObserver(forArticles: articles)
+        }
+    }
+    
     func loadArticles(forSource source: NewsSource) {
         token = nil
         
@@ -114,6 +127,10 @@ extension NewsArticleDataSource {
     
     func getArticles(forSource source: NewsSource, sortOptions: [RealmSwift.SortDescriptor]? = nil) -> Results<ArticleDB>? {
         getArticles(forPredicate: NSPredicate(format: "source == %@", source.rawValue), sortOptions: sortOptions)
+    }
+    
+    func getFavouriteArticles(sortOptions: [RealmSwift.SortDescriptor]? = nil) -> Results<ArticleDB>? {
+        getArticles(forPredicate: NSPredicate(format: "favourite == true"), sortOptions: sortOptions)
     }
 }
 

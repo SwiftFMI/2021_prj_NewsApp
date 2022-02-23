@@ -25,6 +25,7 @@ class SystemAssets {
     static let personTwoCircle = UIImage(systemName: "person.2.circle")
     static let listDashHeaderRectangle = UIImage(systemName: "list.dash.header.rectangle")
     static let heartFill = UIImage(systemName: "heart.fill")
+    static let heart = UIImage(systemName: "heart")
     static let presonFillViewfinder = UIImage(systemName: "person.fill.viewfinder")
     static let personThree = UIImage(systemName: "person.3")
     static let externalDrive = UIImage(systemName: "externaldrive.fill")

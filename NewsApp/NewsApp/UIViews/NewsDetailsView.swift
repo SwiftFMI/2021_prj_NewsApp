@@ -16,7 +16,7 @@ protocol NewsDetailsViewDelegate: AnyObject {
 class NewsDetailsView: UIView {
     private let posterImageView = UIImageView()
     private let dateLabel = UILabel()
-    private let saveButton = FABButton(with: SystemAssets.heartFill, tintColor: .black)
+    private let toggleFavouriteButton = FABButton()
     private let titleLabel = UILabel()
     private let authorLabel = UILabel()
     private let articleContentLabel = UILabel()
@@ -24,9 +24,14 @@ class NewsDetailsView: UIView {
     private let sourceLabel = UILabel()
     private let sourceUrlLabel = UILabel()
     
+
+    private var isArticleFavourite: Bool
+    
     weak var interactionDelegate: NewsDetailsViewDelegate?
     
-    init() {
+    init(isArticleFavourite: Bool?) {
+        self.isArticleFavourite = isArticleFavourite ?? false
+        
         super.init(frame: .zero)
        
         translatesAutoresizingMaskIntoConstraints = false
@@ -34,19 +39,19 @@ class NewsDetailsView: UIView {
         
         configureImageView(posterImageView)
         configureDateLabel(dateLabel)
-        configureButton(saveButton)
+        configureFavouriteButton(toggleFavouriteButton)
         configureTitleLabel(titleLabel)
         configureSecondaryStyleLabel(authorLabel)
         configureContentLabel(articleContentLabel)
         configureTextButton(openFullButton)
         configureSecondaryStyleLabel(sourceLabel)
         
-        saveButton.addTarget(self, action: #selector(saveArticle), for: .touchUpInside)
+        toggleFavouriteButton.addTarget(self, action: #selector(saveArticle), for: .touchUpInside)
         openFullButton.addTarget(self, action: #selector(openFull), for: .touchUpInside)
         
         addSubview(posterImageView)
         addSubview(dateLabel)
-        addSubview(saveButton)
+        addSubview(toggleFavouriteButton)
         addSubview(titleLabel)
         addSubview(authorLabel)
         addSubview(articleContentLabel)
@@ -59,13 +64,13 @@ class NewsDetailsView: UIView {
             posterImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             posterImageView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             
-            saveButton.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
-            saveButton.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -10),
+            toggleFavouriteButton.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 10),
+            toggleFavouriteButton.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -10),
             
-            dateLabel.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
+            dateLabel.centerYAnchor.constraint(equalTo: toggleFavouriteButton.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor, constant: 10),
             
-            titleLabel.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 15),
+            titleLabel.topAnchor.constraint(equalTo: toggleFavouriteButton.bottomAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             titleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
             
@@ -130,9 +135,11 @@ class NewsDetailsView: UIView {
         label.numberOfLines = 0
     }
     
-    private func configureButton(_ button: UIButton) {
+    private func configureFavouriteButton(_ button: UIButton) {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
+        
+        setFavouriteButtonStyle()
     }
     
     private func configureTextButton(_ button: UIButton) {
@@ -153,6 +160,17 @@ class NewsDetailsView: UIView {
         articleContentLabel.text = article.articleDescription
         sourceLabel.text = article.getSource()?.rawValue
         openFullButton.setTitle("Open full in browser.", for: .normal)
-        saveButton.isHidden = false
+        toggleFavouriteButton.isHidden = false
+    }
+    
+    func toggleFavouriteButtonStyle() {
+        isArticleFavourite.toggle()
+        setFavouriteButtonStyle()
+    }
+    
+    private func setFavouriteButtonStyle() {
+        isArticleFavourite ?
+        toggleFavouriteButton.setImage(SystemAssets.heartFill?.resizeImage(width: 30)?.withTintColor(.black), for: .normal) :
+        toggleFavouriteButton.setImage(SystemAssets.heart?.resizeImage(width: 30)?.withTintColor(.black), for: .normal)
     }
 }
