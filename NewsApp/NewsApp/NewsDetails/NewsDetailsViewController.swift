@@ -90,11 +90,11 @@ extension NewsDetailsViewController: NewsDetailsViewDelegate {
         guard let realm = try? Realm(),
               let article = article
         else { return }
-        
-        article.favourite.toggle()
+
         newsDetailsView.toggleFavouriteButtonStyle()
         
         realm.safeWrite {
+            article.favourite.toggle()
             realm.add(article, update: .modified)
             // Shite, should not need to add the object after modification, but it is how it is
         }
