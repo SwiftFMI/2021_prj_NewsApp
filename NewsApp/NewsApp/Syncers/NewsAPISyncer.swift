@@ -13,8 +13,9 @@ fileprivate let baseUrl = "https://newsapi.org/v2/"
 fileprivate let topHeadlinesPath = "top-headlines"
 fileprivate let everythingPath = "everything"
 
-fileprivate let apiKeys: [String]  = [
-    "41c44882480a4ba78343301163d2c0bd"
+fileprivate let apiKeys = [
+    "41c44882480a4ba78343301163d2c0bd",
+    "da12389d61324eaab7565d2144615670"
 ]
 
 class NewsAPISyncer: NSObject {
