@@ -61,8 +61,7 @@ class DashboardViewController: UIViewController {
     }
     
     @objc private func syncTable() {
-        // TODO: what do we sync and load exactly ?
-        articleDataSource.syncArticles(forCountry: .de, completion: { [weak self] in
+        articleDataSource.syncArticles(forCountry: .us, completion: { [weak self] in
             DispatchQueue.main.async {
                 self?.refreshControl.endRefreshing()
             }
