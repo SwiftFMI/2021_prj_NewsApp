@@ -12,6 +12,9 @@ class NewsListViewController: UIViewController {
     private var articleDataSource: NewsArticleDataSource?
     private var filtered = [ArticleDB]()
     
+    private var model = NewsRecommender2()
+    private var recommendedNews: [String] = []
+    
     private var searchBar = UISearchBar()
     private var newsTableView = UITableView()
     private var searchActive: Bool = false
@@ -112,6 +115,28 @@ class NewsListViewController: UIViewController {
         guard let sideMenuController = sideMenuController else { return }
         sideMenuController.isMenuRevealed ? sideMenuController.hideMenu() : sideMenuController.revealMenu()
     }
+    
+    private func setRecommendations(forArticle article: ArticleDB) {
+        guard let articleId = article.id else { return }
+        
+        let user = [articleId : article.recommendationValue]
+        
+        // Creating an canstant of type CocktailModel1Input, that the model needs to make the recommendations
+        let input = NewsRecommender2Input(items: user, k: 10)
+        
+        // Safely unwraping the prdiction that the model returns, because its optional and we need to assign it to a constant, that wll hold the results
+        guard let unwrappedResults = try? model.prediction(input: input) else {
+            fatalError("Could not get results back!")
+        }
+        
+        // This constant will hold the .recommendations from the returned resuls from the model. They are in order from most relevant to least relevant
+        let results = unwrappedResults.scores
+        
+        for (articleId, _) in results {
+            recommendedNews.append(articleId)
+            print("BACA", articleId)
+        }
+    }
 }
 
 extension NewsListViewController : UITableViewDataSource {
@@ -155,6 +180,8 @@ extension NewsListViewController :UITableViewDelegate{
                 tableView.cellForRow(at: indexPath)?.isSelected = false
             }
         })
+        
+        setRecommendations(forArticle: article)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
