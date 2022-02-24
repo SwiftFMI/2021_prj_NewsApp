@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum NewsCategory: String {
+enum NewsCategory: String, CaseIterable {
     case business = "business"
     case entertainment = "entertainment"
     case general = "general"
