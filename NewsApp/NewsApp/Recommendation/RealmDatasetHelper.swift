@@ -64,23 +64,24 @@ class RealmDatasetHelper {
         } catch {
             print("error creating file")
         }
-        
-        var data = ""
-        
-        do {
-            let path = try fileManager.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
-            let fileURL = path.appendingPathComponent("NewsAppRecommendationModel.csv")
-            
-            data = try String(contentsOf: fileURL)
-            
-            var stringFromCsv = parseCsv(data)
-            stringFromCsv.removeFirst()
-            
-            NSLog("\(stringFromCsv)")
-        } catch {
-            print(error)
-            return
-        }
+
+// Just an example on how to parse it back to an array of arrays of strings
+//        var data = ""
+//
+//        do {
+//            let path = try fileManager.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
+//            let fileURL = path.appendingPathComponent("NewsAppRecommendationModel.csv")
+//
+//            data = try String(contentsOf: fileURL)
+//
+//            var stringFromCsv = parseCsv(data)
+//            stringFromCsv.removeFirst()
+//
+//            NSLog("\(stringFromCsv)")
+//        } catch {
+//            print(error)
+//            return
+//        }
     }
     
     func parseCsv(_ data: String) -> [[String]] {
