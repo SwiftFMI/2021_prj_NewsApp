@@ -65,6 +65,7 @@
 		20FF727327C56B4500369EC2 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF727227C56B4500369EC2 /* AuthViewController.swift */; };
 		6192B33327C58B7400017CDA /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6192B33127C58B7300017CDA /* NewsListTableViewCell.swift */; };
 		6192B33427C58B7400017CDA /* NewsListViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6192B33227C58B7400017CDA /* NewsListViewControler.swift */; };
+		E32E971427C7D243008567DA /* NewsRecommender.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E32E971327C7D243008567DA /* NewsRecommender.mlmodel */; };
 		E363326027C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325427C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf */; };
 		E363326127C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325527C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf */; };
 		E363326227C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E363325627C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf */; };
@@ -153,6 +154,7 @@
 		20FF727227C56B4500369EC2 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		6192B33127C58B7300017CDA /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		6192B33227C58B7400017CDA /* NewsListViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewControler.swift; sourceTree = "<group>"; };
+		E32E971327C7D243008567DA /* NewsRecommender.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewsRecommender.mlmodel; sourceTree = "<group>"; };
 		E363325427C2F6DB0051B849 /* PlayfairDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		E363325527C2F6DB0051B849 /* PlayfairDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
 		E363325627C2F6DB0051B849 /* PlayfairDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Medium.ttf"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		202CBAE727BD5F2B00DA4FCD = {
 			isa = PBXGroup;
 			children = (
+				E32E971327C7D243008567DA /* NewsRecommender.mlmodel */,
 				E363325327C2F6DB0051B849 /* Fonts */,
 				202CBAF227BD5F2B00DA4FCD /* NewsApp */,
 				202CBAF127BD5F2B00DA4FCD /* Products */,
@@ -589,6 +592,7 @@
 				202CBB1527BD602300DA4FCD /* SearchableContentViewController.swift in Sources */,
 				202CBB3C27BD68A300DA4FCD /* DashboardViewController.swift in Sources */,
 				202CBB1027BD5FCE00DA4FCD /* SeparatorView.swift in Sources */,
+				E32E971427C7D243008567DA /* NewsRecommender.mlmodel in Sources */,
 				202CBB2127BD61F000DA4FCD /* UIImageExtensions.swift in Sources */,
 				200DEB9327BEED4400169D33 /* NewsAPIResponse.swift in Sources */,
 				202CBAF427BD5F2B00DA4FCD /* AppDelegate.swift in Sources */,
