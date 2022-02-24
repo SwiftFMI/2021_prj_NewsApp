@@ -51,8 +51,7 @@ class AuthViewController: UIViewController {
         toggleViewModeButton.addTarget(self, action: #selector(toggleViewMode), for: .touchUpInside)
         
         let logoImageView = UIImageView()
-        //TODO: replace image asset with app icon, and also set app icon as well
-        logoImageView.image = UIImage(named: "bbc-news")?.resizeImage(width: 120)
+        logoImageView.image = UIImage(named: "logo")?.resizeImage(width: 160)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.backgroundColor = .clear
         

@@ -100,9 +100,8 @@ class NewsListTableViewCell : UITableViewCell{
         
         newsDate.text = Date.formattedDateFromString(dateString: article.publishedAt ?? "")
         
-        if let url = URL(string: article.urlToImage ?? "") {
-            newsImage.load(url: url)
-        }
+        NewsAPISyncer().getImage(forUrl: article.urlToImage, completion: { [weak self] image in
+            self?.newsImage.image = image
+        })
     }
-    
 }

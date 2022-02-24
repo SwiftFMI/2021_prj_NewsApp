@@ -107,9 +107,9 @@ class NewsFeedTableViewCell: UITableViewCell {
         date.textColor = .primaryGray
         date.font = UIFont.newsAppFont(ofSize: 13, weight: .light)
         
-        if let url = URL(string: article.urlToImage ?? "") {
-            rightImage.load(url: url)
-        }
+        NewsAPISyncer().getImage(forUrl: article.urlToImage, completion: { [weak self] image in
+            self?.rightImage.image = image
+        })
     }
 }
 
