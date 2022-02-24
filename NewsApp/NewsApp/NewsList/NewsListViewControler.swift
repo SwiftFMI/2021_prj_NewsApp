@@ -165,17 +165,8 @@ extension NewsListViewController :UITableViewDelegate{
 }
 
 extension NewsListViewController :UISearchBarDelegate{
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
-    }
-    
-    //func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    //    searchActive = false;
-    //}
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
         self.view.endEditing(true)
     }
     
@@ -192,6 +183,10 @@ extension NewsListViewController :UISearchBarDelegate{
         }
         
         self.newsTableView.reloadData()
+        if self.newsTableView.numberOfRows(inSection: 0) > 0{
+            let topRow = IndexPath(row: 0, section: 0)
+            self.newsTableView.scrollToRow(at: topRow, at: .top, animated: true)
+        }
     }
 }
 
