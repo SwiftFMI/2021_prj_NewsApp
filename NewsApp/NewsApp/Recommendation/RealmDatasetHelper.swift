@@ -49,10 +49,10 @@ class RealmDatasetHelper {
     
     func updateCsvFile() {
         // not sure how to just update changes from realm to csv using `changes`, so just creating a new csv on realm update
-        var csvString = "\("Article ID"),\("Category"),\("Recommendation Value")\n\n"
+        var csvString = "Article ID,Category,Recommendation Value #\n"
         
         categorizedArticles?.forEach { article in
-            csvString = csvString.appending("\(String(describing: article.id)) ,\(String(describing: article.getCategory()?.rawValue)), \(String(describing: article.recommendationValue))\n")
+            csvString = csvString.appending("\(article.id),\(article.getCategory()?.rawValue),\(article.recommendationValue)\n")
         }
         
         let fileManager = FileManager.default
