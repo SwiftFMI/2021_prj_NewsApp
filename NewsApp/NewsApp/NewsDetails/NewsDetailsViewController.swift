@@ -24,6 +24,8 @@ class NewsDetailsViewController: UIViewController {
         
         detailsView.setArticle(article, withPosterImage: posterImage)
         detailsView.interactionDelegate = self
+        
+        UserInfoDataSource().incrementArticlesRead(forCategory: article?.getCategory())
     }
     
     required init?(coder: NSCoder) {

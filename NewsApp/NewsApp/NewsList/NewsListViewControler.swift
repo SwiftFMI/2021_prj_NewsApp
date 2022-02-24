@@ -103,9 +103,6 @@ class NewsListViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
         
         newsTableView.reloadData()
-        
-        
-        let rec = RealmDatasetHelper()
     }
     
     @objc private func showRightSideBar() {

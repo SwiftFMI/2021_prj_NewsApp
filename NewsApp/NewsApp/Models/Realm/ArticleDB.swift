@@ -23,7 +23,7 @@ class ArticleDB: Object {
     @objc dynamic private var category: String?
     @objc dynamic private var source: String?
     
-    @objc dynamic var recommendationValue: Double = 0.0
+    @objc dynamic private(set) var recommendationValue: Double = 0.0
     
     override static func primaryKey() -> String? {
         return "id"
@@ -61,5 +61,32 @@ class ArticleDB: Object {
     
     func getSource() -> NewsSource? {
         source != nil ? NewsSource.init(rawValue: source!) : nil
+    }
+    
+    func calculateRecommendationValue(forUserInfo userInfo: UserInfoDB?) {
+        guard let category = getCategory(), let userInfo = userInfo else {
+            return
+        }
+        
+        var articlesReadForCategory = 1
+
+        switch category {
+        case .business:
+            articlesReadForCategory = userInfo.businessArticlesRead
+        case .entertainment:
+            articlesReadForCategory = userInfo.entertainmentArticlesRead
+        case .general:
+            articlesReadForCategory = userInfo.generalArticlesRead
+        case .health:
+            articlesReadForCategory = userInfo.healthArticlesRead
+        case .science:
+            articlesReadForCategory = userInfo.scienceArticlesRead
+        case .sports:
+            articlesReadForCategory = userInfo.sportsArticlesRead
+        case .technology:
+            articlesReadForCategory = userInfo.technologyArticlesRead
+        }
+        
+        recommendationValue = Double(articlesReadForCategory) / Double(userInfo.totalArticlesRead)
     }
 }

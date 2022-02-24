@@ -235,6 +235,8 @@ class AuthViewController: UIViewController {
             }
             
             AuthState.current.logIn(user)
+            UserInfoDataSource().reloadUserInfo()
+            
             self?.dismiss(animated: true, completion: nil)
         }
     }

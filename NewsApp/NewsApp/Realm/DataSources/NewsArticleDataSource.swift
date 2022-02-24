@@ -46,7 +46,8 @@ class NewsArticleDataSource {
     func loadAllArticles() {
         token = nil
         
-        articlesDb = getArticles()
+        articlesDb = getArticles(sortOptions: [SortDescriptor(keyPath: "recommendationValue", ascending: false),
+                                               SortDescriptor(keyPath: "publishedAt", ascending: false)])
         articles = articlesDb?.toArray()
         
         delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
@@ -145,17 +146,19 @@ extension NewsArticleDataSource {
         
         realm.safeWrite {
             articles?.forEach { article in
-                realm.add(ArticleDB(author: article.author,
-                                    title: article.title,
-                                    articleDescription: article.description,
-                                    url: article.url,
-                                    urlToImage: article.urlToImage,
-                                    publishedAt: article.publishedAt,
-                                    content: article.content,
-                                    category: category,
-                                    source: source),
-                          update: .modified
-                )
+                let articleDb = ArticleDB(author: article.author,
+                                          title: article.title,
+                                          articleDescription: article.description,
+                                          url: article.url,
+                                          urlToImage: article.urlToImage,
+                                          publishedAt: article.publishedAt,
+                                          content: article.content,
+                                          category: category,
+                                          source: source)
+                
+                articleDb.calculateRecommendationValue(forUserInfo: UserInfoDataSource().userInfo)
+                
+                realm.add(articleDb, update: .modified)
             }
         }
     }
