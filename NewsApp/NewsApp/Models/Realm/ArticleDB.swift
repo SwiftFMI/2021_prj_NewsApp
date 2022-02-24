@@ -41,7 +41,7 @@ class ArticleDB: Object {
         self.content = content
         self.category = category?.rawValue
         
-        self.id = "\(title) - \(publishedAt)"
+        self.id = "\(title ?? "") - \(publishedAt ?? "")"
         
         self.setCategory(category)
         self.setSource(source)
