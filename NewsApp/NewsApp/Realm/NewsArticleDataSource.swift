@@ -43,10 +43,10 @@ class NewsArticleDataSource {
         token = nil
     }
     
-    func loadAllArticles() {
+    func loadAllArticles(forIds ids: [String]? = nil) {
         token = nil
         
-        articlesDb = getArticles()
+        articlesDb = ids == nil ? getArticles() : getArticlesForIds(ids!)
         articles = articlesDb?.toArray()
         
         delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
@@ -133,6 +133,10 @@ extension NewsArticleDataSource {
     
     func getFavouriteArticles(sortOptions: [RealmSwift.SortDescriptor]? = nil) -> Results<ArticleDB>? {
         getArticles(forPredicate: NSPredicate(format: "favourite == true"), sortOptions: sortOptions)
+    }
+    
+    func getArticlesForIds(_ ids: [String], sortOptions: [RealmSwift.SortDescriptor]? = nil) -> Results<ArticleDB>? {
+        getArticles(forPredicate: NSPredicate(format: "id IN %@", ids), sortOptions: sortOptions)
     }
 }
 
