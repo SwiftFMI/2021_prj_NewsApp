@@ -50,6 +50,8 @@ class NewsArticleDataSource {
                                                SortDescriptor(keyPath: "publishedAt", ascending: false)])
         articles = articlesDb?.toArray()
         
+        updateRecommendationValues(forArticles: articlesDb)
+        
         delegate?.newsArticleDataSourceDelegate(didUpdateArticles: self)
         
         if let articles = articlesDb {
@@ -106,6 +108,16 @@ class NewsArticleDataSource {
             }
         })
     }
+    
+    private func updateRecommendationValues(forArticles articles: Results<ArticleDB>?) {
+        guard let realm = try? Realm(), let userInfo = UserInfoDataSource().userInfo else { return }
+        
+        realm.safeWrite {
+            articles?.forEach { article in
+                article.calculateRecommendationValue(forUserInfo: userInfo)
+            }
+        }
+    }
 }
 
 // MARK: Methods to fetch articles from local data
@@ -140,7 +152,7 @@ extension NewsArticleDataSource {
 // MARK: Methods to save articles to local data
 extension NewsArticleDataSource {
     func saveArticles(_ articles: [Article]?, fromCategory category: NewsCategory? = nil, fromSource source: NewsSource? = nil) {
-        guard let realm = try? Realm() else {
+        guard let realm = try? Realm(), let userInfo = UserInfoDataSource().userInfo else {
             return
         }
         
@@ -156,7 +168,7 @@ extension NewsArticleDataSource {
                                           category: category,
                                           source: source)
                 
-                articleDb.calculateRecommendationValue(forUserInfo: UserInfoDataSource().userInfo)
+                articleDb.calculateRecommendationValue(forUserInfo: userInfo)
                 
                 realm.add(articleDb, update: .modified)
             }
