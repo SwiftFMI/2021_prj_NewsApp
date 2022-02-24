@@ -23,7 +23,7 @@ class ArticleDB: Object {
     @objc dynamic private var category: String?
     @objc dynamic private var source: String?
     
-    @objc dynamic var recomendationValue: Double = 0.0
+    @objc dynamic var recommendationValue: Double = 0.0
     
     override static func primaryKey() -> String? {
         return "id"

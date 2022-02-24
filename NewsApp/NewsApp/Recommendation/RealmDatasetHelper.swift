@@ -25,6 +25,8 @@ class RealmDatasetHelper {
         
         categorizedArticles = getCategorizedArticles()
         
+        updateCsvFile()
+        
         if let categorizedArticles = categorizedArticles {
             notificationToken = RealmHelper.observeResults(categorizedArticles, actions: { [weak self] changes in
                 if let self = self {
@@ -50,7 +52,7 @@ class RealmDatasetHelper {
         var csvString = "\("Article ID"),\("Category"),\("Recommendation Value")\n\n"
         
         categorizedArticles?.forEach { article in
-            csvString = csvString.appending("\(String(describing: article.id)) ,\(String(describing: article.getCategory()?.rawValue)), \(String(describing: article.recomendationValue))\n")
+            csvString = csvString.appending("\(String(describing: article.id)) ,\(String(describing: article.getCategory()?.rawValue)), \(String(describing: article.recommendationValue))\n")
         }
         
         let fileManager = FileManager.default
