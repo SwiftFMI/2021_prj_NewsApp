@@ -52,13 +52,13 @@ class NewsListViewController: UIViewController {
         navigationItemTitle = "Favourites"
     }
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        
-        articleDataSource = NewsArticleDataSource(withNewsArticleDataSourceDelegate: self, loadOnInit: false)
-        
-        navigationItemTitle = "Recommended"
-    }
+//    init() {
+//        super.init(nibName: nil, bundle: nil)
+//
+//        articleDataSource = NewsArticleDataSource(withNewsArticleDataSourceDelegate: self, loadOnInit: false)
+//
+//        navigationItemTitle = "Recommended"
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -114,9 +114,6 @@ class NewsListViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
         
         newsTableView.reloadData()
-        
-        
-        let rec = RealmDatasetHelper()
     }
     
     @objc private func showRightSideBar() {
@@ -124,29 +121,29 @@ class NewsListViewController: UIViewController {
         sideMenuController.isMenuRevealed ? sideMenuController.hideMenu() : sideMenuController.revealMenu()
     }
     
-    private func setRecommendations(forArticle article: ArticleDB) {
-        guard let articleId = article.id else { return }
-        
-        let user = [articleId : article.recommendationValue]
-        
-        // Creating an canstant of type CocktailModel1Input, that the model needs to make the recommendations
-        let input = NewsRecommender2Input(items: user, k: 10)
-        
-        // Safely unwraping the prdiction that the model returns, because its optional and we need to assign it to a constant, that wll hold the results
-        guard let unwrappedResults = try? model.prediction(input: input) else {
-            fatalError("Could not get results back!")
-        }
-        
-        // This constant will hold the .recommendations from the returned resuls from the model. They are in order from most relevant to least relevant
-        let results = unwrappedResults.scores
-        
-        articleDataSource?.loadAllArticles(forIds: Array(results.keys))
-        
-        for (articleId, _) in results {
-            recommendedNews.append(articleId)
-            print("BACA", articleId)
-        }
-    }
+//    private func setRecommendations(forArticle article: ArticleDB) {
+//        guard let articleId = article.id else { return }
+//
+//        let user = [articleId : article.recommendationValue]
+//
+//        // Creating an canstant of type CocktailModel1Input, that the model needs to make the recommendations
+//        let input = NewsRecommender2Input(items: user, k: 10)
+//
+//        // Safely unwraping the prdiction that the model returns, because its optional and we need to assign it to a constant, that wll hold the results
+//        guard let unwrappedResults = try? model.prediction(input: input) else {
+//            fatalError("Could not get results back!")
+//        }
+//
+//        // This constant will hold the .recommendations from the returned resuls from the model. They are in order from most relevant to least relevant
+//        let results = unwrappedResults.scores
+//
+//        articleDataSource?.loadAllArticles(forIds: Array(results.keys))
+//
+//        for (articleId, _) in results {
+//            recommendedNews.append(articleId)
+//            print("BACA", articleId)
+//        }
+//    }
 }
 
 extension NewsListViewController : UITableViewDataSource {
@@ -191,7 +188,7 @@ extension NewsListViewController :UITableViewDelegate{
             }
         })
         
-        setRecommendations(forArticle: article)
+//        setRecommendations(forArticle: article)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

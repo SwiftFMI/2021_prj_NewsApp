@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-class AuthViewController: UIViewController {
+class AuthViewController: KeyboardObservingViewController {
     private enum ViewMode {
         case signIn, signUp
     }
@@ -79,10 +79,12 @@ class AuthViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         
         formButtonsTopAnchor = buttonsContainer.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 5)
+        bottomViewConstraint = formContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150)
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor, constant: -100),
+//            logoImageView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor, constant: -100),
+            logoImageView.bottomAnchor.constraint(equalTo: formContainer.topAnchor),
             
             formContainer.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             formContainer.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 20),
@@ -120,6 +122,8 @@ class AuthViewController: UIViewController {
             
             spinner.centerXAnchor.constraint(equalTo: signInButton.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor),
+            
+            bottomViewConstraint
         ])
         
         updateViewMode()
