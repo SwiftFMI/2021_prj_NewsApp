@@ -26,7 +26,7 @@ class NewsListViewController: UIViewController {
     init(forCategory category: NewsCategory) {
         super.init(nibName: nil, bundle: nil)
         
-        articleDataSource = NewsArticleDataSource(withArticleCategory: category, withMessageDataSourceDelegate: self, loadOnInit: true)
+        articleDataSource = NewsArticleDataSource(withArticleCategory: category, withNewsArticleDataSourceDelegate: self, loadOnInit: true)
         
         syncArticles = { [weak self] in self?.articleDataSource?.syncArticles(forCategory: category) }
         
@@ -36,7 +36,7 @@ class NewsListViewController: UIViewController {
     init(forSource sourceDisplay: NewsSourceDisplay) {
         super.init(nibName: nil, bundle: nil)
         
-        articleDataSource = NewsArticleDataSource(withArticleSource: sourceDisplay.source, withMessageDataSourceDelegate: self, loadOnInit: true)
+        articleDataSource = NewsArticleDataSource(withArticleSource: sourceDisplay.source, withNewsArticleDataSourceDelegate: self, loadOnInit: true)
         
         syncArticles = { [weak self] in self?.articleDataSource?.syncArticles(fromSource: sourceDisplay.source) }
         
@@ -46,10 +46,18 @@ class NewsListViewController: UIViewController {
     init(showOnlyFavourites onlyFavourites: Bool) {
         super.init(nibName: nil, bundle: nil)
         
-        articleDataSource = NewsArticleDataSource(withMessageDataSourceDelegate: self, loadOnInit: false)
+        articleDataSource = NewsArticleDataSource(withNewsArticleDataSourceDelegate: self, loadOnInit: false)
         articleDataSource?.loadFavouriteArticles()
         
         navigationItemTitle = "Favourites"
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        articleDataSource = NewsArticleDataSource(withNewsArticleDataSourceDelegate: self, loadOnInit: false)
+        
+        navigationItemTitle = "Recommended"
     }
     
     required init?(coder: NSCoder) {
@@ -131,6 +139,8 @@ class NewsListViewController: UIViewController {
         
         // This constant will hold the .recommendations from the returned resuls from the model. They are in order from most relevant to least relevant
         let results = unwrappedResults.scores
+        
+        articleDataSource?.loadAllArticles(forIds: results.keys)
         
         for (articleId, _) in results {
             recommendedNews.append(articleId)

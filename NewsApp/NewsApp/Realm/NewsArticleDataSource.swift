@@ -24,17 +24,17 @@ class NewsArticleDataSource {
     
     weak var delegate: NewsArticleDataSourceDelegate?
     
-    init(withMessageDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
+    init(withNewsArticleDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
         self.delegate = delegate
         loadOnInit ? loadAllArticles() : nil
     }
     
-    init(withArticleCategory category: NewsCategory, withMessageDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
+    init(withArticleCategory category: NewsCategory, withNewsArticleDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
         self.delegate = delegate
         loadOnInit ? loadArticles(forCategory: category) : nil
     }
     
-    init(withArticleSource source: NewsSource, withMessageDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
+    init(withArticleSource source: NewsSource, withNewsArticleDataSourceDelegate delegate: NewsArticleDataSourceDelegate? = nil, loadOnInit: Bool = false) {
         self.delegate = delegate
         loadOnInit ? loadArticles(forSource: source) : nil
     }
