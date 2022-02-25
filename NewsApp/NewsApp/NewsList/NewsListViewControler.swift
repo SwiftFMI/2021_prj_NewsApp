@@ -140,7 +140,7 @@ class NewsListViewController: UIViewController {
         // This constant will hold the .recommendations from the returned resuls from the model. They are in order from most relevant to least relevant
         let results = unwrappedResults.scores
         
-        articleDataSource?.loadAllArticles(forIds: results.keys)
+        articleDataSource?.loadAllArticles(forIds: Array(results.keys))
         
         for (articleId, _) in results {
             recommendedNews.append(articleId)
